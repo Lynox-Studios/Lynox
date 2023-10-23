@@ -27,12 +27,6 @@ namespace Lynox.ConsoleMode
             Console.ForegroundColor = ConsoleColor.Green;
             var name = Console.ReadLine();
             Console.ResetColor();
-            if (name == "SAMMA")
-            {
-
-                goto password;
-
-            }
             if (name != rUsername)
             {
                 Console.WriteLine("Invalid username!");
@@ -44,10 +38,7 @@ namespace Lynox.ConsoleMode
             Console.ForegroundColor = ConsoleColor.Green;
             var passwd = Console.ReadLine();
             Console.ResetColor();
-            if (passwd == "ADMIN")
-            {
-            }
-            else if (passwd != rPassword)
+            if (passwd != rPassword)
             {
                 Console.CursorTop--;
                 Console.CursorLeft += ("Password: ").Length + passwd.Length;

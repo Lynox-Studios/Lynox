@@ -9,7 +9,7 @@ namespace Lynox
 {
     internal static class SystemData
     {
-        public const string OSName = "Lynox";              // OS Name
+        public const string OSName = "LynoxSEF";              // OS Name
         public const string OSVer  = "0.1";                // OS Version
         public const string OSAcNa = OSName + " " + OSVer; // OS Access Name
 

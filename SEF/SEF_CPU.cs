@@ -136,15 +136,78 @@ namespace Lynox.SEF.CPU
                         break;
                     case "DEC":
                         break;
-                    case "DIV":
-                        break;
                     case "ESC":
                         break;
                     case "HLT":
                         break;
                     case "IDIV":
-                        break;
-                    case "IMULT":
+                    case "DIV":
+
+                        decimal Divto = 0;
+
+                        switch (args[2])
+                        {
+                            case "AX":
+                                Divto = Regs.AX;
+                                break;
+                            case "CX":
+                                Divto = Regs.CX;
+                                break;
+                            case "BX":
+                                Divto = Regs.BX;
+                                break;
+                            case "SP":
+                                Divto = Regs.SP;
+                                break;
+                            case "BP":
+                                Divto = Regs.BP;
+                                break;
+                            case "SI":
+                                Divto = Regs.SI;
+                                break;
+                            case "DI":
+                                Divto = Regs.DI;
+                                break;
+                            default:
+
+                                if (decimal.TryParse(args[2], out Divto))
+                                { }
+                                else
+                                {
+                                    Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                }
+
+                                break;
+                        }
+
+                        switch (args[1].ToUpper())
+                        {
+                            case "AX":
+                                Regs.AX /= Divto;
+                                break;
+                            case "CX":
+                                Regs.CX /= Divto;
+                                break;
+                            case "BX":
+                                Regs.BX /= Divto;
+                                break;
+                            case "SP":
+                                Regs.SP /= Divto;
+                                break;
+                            case "BP":
+                                Regs.BP /= Divto;
+                                break;
+                            case "SI":
+                                Regs.SI /= Divto;
+                                break;
+                            case "DI":
+                                Regs.DI /= Divto;
+                                break;
+                            default:
+                                Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                break;
+                        }
+
                         break;
                     case "IN":
                         break;
@@ -186,7 +249,74 @@ namespace Lynox.SEF.CPU
                         break;
                     case "MOVSW":
                         break;
+                    case "IMUL":
                     case "MUL":
+
+                        decimal Multo = 0;
+
+                        switch (args[2])
+                        {
+                            case "AX":
+                                Multo = Regs.AX;
+                                break;
+                            case "CX":
+                                Multo = Regs.CX;
+                                break;
+                            case "BX":
+                                Multo = Regs.BX;
+                                break;
+                            case "SP":
+                                Multo = Regs.SP;
+                                break;
+                            case "BP":
+                                Multo = Regs.BP;
+                                break;
+                            case "SI":
+                                Multo = Regs.SI;
+                                break;
+                            case "DI":
+                                Multo = Regs.DI;
+                                break;
+                            default:
+
+                                if (decimal.TryParse(args[2], out Multo))
+                                { }
+                                else
+                                {
+                                    Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                }
+
+                                break;
+                        }
+
+                        switch (args[1].ToUpper())
+                        {
+                            case "AX":
+                                Regs.AX *= Multo;
+                                break;
+                            case "CX":
+                                Regs.CX *= Multo;
+                                break;
+                            case "BX":
+                                Regs.BX *= Multo;
+                                break;
+                            case "SP":
+                                Regs.SP *= Multo;
+                                break;
+                            case "BP":
+                                Regs.BP *= Multo;
+                                break;
+                            case "SI":
+                                Regs.SI *= Multo;
+                                break;
+                            case "DI":
+                                Regs.DI *= Multo;
+                                break;
+                            default:
+                                Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                break;
+                        }
+
                         break;
                     case "NEG":
                         break;

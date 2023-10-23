@@ -1,4 +1,5 @@
 ﻿using Lynox.ConsoleMode.ConsoleUtils;
+using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,7 +75,7 @@ namespace Lynox.ConsoleMode
             if (command == null || command == "" || command == " " || command.Split(' ').Length <= 0)
                 return;
 
-            switch (command.Split(' ')[0])
+            switch (command.Split(' ')[0].ToLower())
             {
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -185,6 +186,37 @@ namespace Lynox.ConsoleMode
                     if (!(command.Split(' ').Length > 1))
                         break;
                     Console.WriteLine(File.ReadAllText(currentDir + command.Split(' ')[1]));
+                    break;
+                case "sef":
+
+                    if ((command.Split(' ').Length > 1))
+                    {
+
+                        if (command.Split(' ')[1].ToLower() == "assemble")
+                        {
+                            var sefexe = Console.ReadLine();
+
+                            SEF_CPU.Assemble(sefexe);
+
+                        }
+                        else if (command.Split(' ')[1].ToLower() == "showregs")
+                        {
+
+                            Console.WriteLine($"AX: {SEF_CPU.Regs.AX}");
+                            Console.WriteLine($"BX: {SEF_CPU.Regs.BX}");
+                            Console.WriteLine($"CX: {SEF_CPU.Regs.CX}");
+                            Console.WriteLine($"DI: {SEF_CPU.Regs.DI}");
+                            Console.WriteLine($"SI: {SEF_CPU.Regs.SI}");
+                            Console.WriteLine($"SP: {SEF_CPU.Regs.SP}");
+
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("SEF V0.1");
+                    }
+
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

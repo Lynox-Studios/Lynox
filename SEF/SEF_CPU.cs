@@ -10,105 +10,12 @@ namespace Lynox.SEF.CPU
     internal class SEF_CPU
     {
         public SEF_CPU() { }
-        //assembly instructions and registers
-
-        public enum Keys
-        {
-
-            ADD,
-            CALL,
-            AAA,
-            AAD,
-            AAM,
-            AAS,
-            ADC,
-            AND,
-            CBW,
-            CLC,
-            CLD,
-            CLI,
-            CMC,
-            CMPSB,
-            CMPSW,
-            CWD,
-            DAA,
-            DAS,
-            DEC,
-            DIV,
-            ESC,
-            HLT,
-            IDIV,
-            IMULT,
-            IN,
-            INC,
-            INT,
-            INTO,
-            IRET,
-            Jcc,
-            JCXZ,
-            JMP,
-            LAHF,
-            LDS,
-            LEA,
-            LES,
-            LOCK,
-            LODSB,
-            LODSW,
-            LOOP,
-            LOOPx,
-            MOV,
-            MOVSB,
-            MOVSW,
-            MUL,
-            NEG,
-            NOP,
-            NOT,
-            OR,
-            OUT,
-            POP,
-            PUSH,
-            PUSHF,
-            RCL,
-            RCR,
-            REPxx,
-            RET,
-            RETN,
-            RETF,
-            ROL,
-            ROR,
-            SAHF,
-            SAL,
-            SAR,
-            SBB,
-            SCASB,
-            SCASW,
-            SHL,
-            SHR,
-            STC,
-            STD,
-            STI,
-            STOSB,
-            STOSW,
-            SUB,
-            TEST,
-            WAIT,
-            XCHG,
-            ALAT,
-            XOR
-
-        }
+        //registers
         //16-bit registers for now
         public static class Regs
         {
 
             public static decimal AX, CX,BX,SP,BP,SI,DI;
-
-        }
-
-        public enum ERegs
-        {
-
-            AX, CX, BX, SP, BP, SI, DI
 
         }
 
@@ -123,39 +30,39 @@ namespace Lynox.SEF.CPU
 
                 string[] args = item.Split(' ',',');
 
-                switch (SEF_UTILS.ToEnum<Keys>(args[0]))
+                switch (args[0])
                 {
-                    case Keys.ADD:
+                    case "ADD":
 
-                        decimal Addto;
+                        decimal Addto = 0;
 
-                        switch (SEF_UTILS.ToEnum<ERegs>(args[2]))
+                        switch (args[2])
                         {
-                            case ERegs.AX:
+                            case "AX":
                                 Addto = Regs.AX;
                                 break;
-                            case ERegs.CX:
+                            case "CX":
                                 Addto = Regs.CX;
                                 break;
-                            case ERegs.BX:
+                            case "BX":
                                 Addto = Regs.BX;
                                 break;
-                            case ERegs.SP:
+                            case "SP":
                                 Addto = Regs.SP;
                                 break;
-                            case ERegs.BP:
+                            case "BP":
                                 Addto = Regs.BP;
                                 break;
-                            case ERegs.SI:
+                            case "SI":
                                 Addto = Regs.SI;
                                 break;
-                            case ERegs.DI:
+                            case "DI":
                                 Addto = Regs.DI;
                                 break;
                             default:
 
-                                if (decimal.TryParse(args[2],out Addto))
-                                {}
+                                if (decimal.TryParse(args[2], out Addto))
+                                { }
                                 else
                                 {
                                     Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
@@ -164,27 +71,27 @@ namespace Lynox.SEF.CPU
                                 break;
                         }
 
-                        switch (SEF_UTILS.ToEnum<ERegs>(args[1].ToUpper()))
+                        switch (args[1].ToUpper())
                         {
-                            case ERegs.AX:
+                            case "AX":
                                 Regs.AX += Addto;
                                 break;
-                            case ERegs.CX:
+                            case "CX":
                                 Regs.CX += Addto;
                                 break;
-                            case ERegs.BX:
+                            case "BX":
                                 Regs.BX += Addto;
                                 break;
-                            case ERegs.SP:
+                            case "SP":
                                 Regs.SP += Addto;
                                 break;
-                            case ERegs.BP:
+                            case "BP":
                                 Regs.BP += Addto;
                                 break;
-                            case ERegs.SI:
+                            case "SI":
                                 Regs.SI += Addto;
                                 break;
-                            case ERegs.DI:
+                            case "DI":
                                 Regs.DI += Addto;
                                 break;
                             default:
@@ -193,163 +100,163 @@ namespace Lynox.SEF.CPU
                         }
 
                         break;
-                    case Keys.CALL:
+                    case "CALL":
                         break;
-                    case Keys.AAA:
+                    case "AAA":
                         break;
-                    case Keys.AAD:
+                    case "AAD":
                         break;
-                    case Keys.AAM:
+                    case "AAM":
                         break;
-                    case Keys.AAS:
+                    case "AAS":
                         break;
-                    case Keys.ADC:
+                    case "ADC":
                         break;
-                    case Keys.AND:
+                    case "AND":
                         break;
-                    case Keys.CBW:
+                    case "CBW":
                         break;
-                    case Keys.CLC:
+                    case "CLC":
                         break;
-                    case Keys.CLD:
+                    case "CLD":
                         break;
-                    case Keys.CLI:
+                    case "CLI":
                         break;
-                    case Keys.CMC:
+                    case "CMC":
                         break;
-                    case Keys.CMPSB:
+                    case "CMPSB":
                         break;
-                    case Keys.CMPSW:
+                    case "CMPSW":
                         break;
-                    case Keys.CWD:
+                    case "CWD":
                         break;
-                    case Keys.DAA:
+                    case "DAA":
                         break;
-                    case Keys.DAS:
+                    case "DAS":
                         break;
-                    case Keys.DEC:
+                    case "DEC":
                         break;
-                    case Keys.DIV:
+                    case "DIV":
                         break;
-                    case Keys.ESC:
+                    case "ESC":
                         break;
-                    case Keys.HLT:
+                    case "HLT":
                         break;
-                    case Keys.IDIV:
+                    case "IDIV":
                         break;
-                    case Keys.IMULT:
+                    case "IMULT":
                         break;
-                    case Keys.IN:
+                    case "IN":
                         break;
-                    case Keys.INC:
+                    case "INC":
                         break;
-                    case Keys.INT:
+                    case "INT":
                         break;
-                    case Keys.INTO:
+                    case "INTO":
                         break;
-                    case Keys.IRET:
+                    case "IRET":
                         break;
-                    case Keys.Jcc:
+                    case "Jcc":
                         break;
-                    case Keys.JCXZ:
+                    case "JCXZ":
                         break;
-                    case Keys.JMP:
+                    case "JMP":
                         break;
-                    case Keys.LAHF:
+                    case "LAHF":
                         break;
-                    case Keys.LDS:
+                    case "LDS":
                         break;
-                    case Keys.LEA:
+                    case "LEA":
                         break;
-                    case Keys.LES:
+                    case "LES":
                         break;
-                    case Keys.LOCK:
+                    case "LOCK":
                         break;
-                    case Keys.LODSB:
+                    case "LODSB":
                         break;
-                    case Keys.LODSW:
+                    case "LODSW":
                         break;
-                    case Keys.LOOP:
+                    case "LOOP":
                         break;
-                    case Keys.LOOPx:
+                    case "LOOPx":
                         break;
-                    case Keys.MOV:
+                    case "MOV":
                         break;
-                    case Keys.MOVSB:
+                    case "MOVSB":
                         break;
-                    case Keys.MOVSW:
+                    case "MOVSW":
                         break;
-                    case Keys.MUL:
+                    case "MUL":
                         break;
-                    case Keys.NEG:
+                    case "NEG":
                         break;
-                    case Keys.NOP:
+                    case "NOP":
                         break;
-                    case Keys.NOT:
+                    case "NOT":
                         break;
-                    case Keys.OR:
+                    case "OR":
                         break;
-                    case Keys.OUT:
+                    case "OUT":
                         break;
-                    case Keys.POP:
+                    case "POP":
                         break;
-                    case Keys.PUSH:
+                    case "PUSH":
                         break;
-                    case Keys.PUSHF:
+                    case "PUSHF":
                         break;
-                    case Keys.RCL:
+                    case "RCL":
                         break;
-                    case Keys.RCR:
+                    case "RCR":
                         break;
-                    case Keys.REPxx:
+                    case "REPxx":
                         break;
-                    case Keys.RET:
+                    case "RET":
                         break;
-                    case Keys.RETN:
+                    case "RETN":
                         break;
-                    case Keys.RETF:
+                    case "RETF":
                         break;
-                    case Keys.ROL:
+                    case "ROL":
                         break;
-                    case Keys.ROR:
+                    case "ROR":
                         break;
-                    case Keys.SAHF:
+                    case "SAHF":
                         break;
-                    case Keys.SAL:
+                    case "SAL":
                         break;
-                    case Keys.SAR:
+                    case "SAR":
                         break;
-                    case Keys.SBB:
+                    case "SBB":
                         break;
-                    case Keys.SCASB:
+                    case "SCASB":
                         break;
-                    case Keys.SCASW:
+                    case "SCASW":
                         break;
-                    case Keys.SHL:
+                    case "SHL":
                         break;
-                    case Keys.SHR:
+                    case "SHR":
                         break;
-                    case Keys.STC:
+                    case "STC":
                         break;
-                    case Keys.STD:
+                    case "STD":
                         break;
-                    case Keys.STI:
+                    case "STI":
                         break;
-                    case Keys.STOSB:
+                    case "STOSB":
                         break;
-                    case Keys.STOSW:
+                    case "STOSW":
                         break;
-                    case Keys.SUB:
+                    case "SUB":
                         break;
-                    case Keys.TEST:
+                    case "TEST":
                         break;
-                    case Keys.WAIT:
+                    case "WAIT":
                         break;
-                    case Keys.XCHG:
+                    case "XCHG":
                         break;
-                    case Keys.ALAT:
+                    case "ALAT":
                         break;
-                    case Keys.XOR:
+                    case "XOR":
                         break;
                     default:
                         break;

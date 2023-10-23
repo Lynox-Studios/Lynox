@@ -247,6 +247,72 @@ namespace Lynox.SEF.CPU
                     case "STOSW":
                         break;
                     case "SUB":
+
+                        decimal Subto = 0;
+
+                        switch (args[2])
+                        {
+                            case "AX":
+                                Subto = Regs.AX;
+                                break;
+                            case "CX":
+                                Subto = Regs.CX;
+                                break;
+                            case "BX":
+                                Subto = Regs.BX;
+                                break;
+                            case "SP":
+                                Subto = Regs.SP;
+                                break;
+                            case "BP":
+                                Subto = Regs.BP;
+                                break;
+                            case "SI":
+                                Subto = Regs.SI;
+                                break;
+                            case "DI":
+                                Subto = Regs.DI;
+                                break;
+                            default:
+
+                                if (decimal.TryParse(args[2], out Subto))
+                                { }
+                                else
+                                {
+                                    Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                }
+
+                                break;
+                        }
+
+                        switch (args[1].ToUpper())
+                        {
+                            case "AX":
+                                Regs.AX -= Subto;
+                                break;
+                            case "CX":
+                                Regs.CX -= Subto;
+                                break;
+                            case "BX":
+                                Regs.BX -= Subto;
+                                break;
+                            case "SP":
+                                Regs.SP -= Subto;
+                                break;
+                            case "BP":
+                                Regs.BP -= Subto;
+                                break;
+                            case "SI":
+                                Regs.SI -= Subto;
+                                break;
+                            case "DI":
+                                Regs.DI -= Subto;
+                                break;
+                            default:
+                                Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                break;
+                        }
+
                         break;
                     case "TEST":
                         break;

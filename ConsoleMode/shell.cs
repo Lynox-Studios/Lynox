@@ -79,7 +79,7 @@ namespace Lynox.ConsoleMode
             if (command == null || command == "" || command == " " || paramArray.Length <= 0)
                 return;
 
-            switch (paramArray[0])
+            switch (paramArray[0].ToLower())
             {
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;

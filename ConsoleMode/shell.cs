@@ -20,7 +20,8 @@ namespace Lynox.ConsoleMode
             if (currentDir.StartsWith("0:\\home\\" + user))
             {
                 shownCurrentDir = currentDir.Replace("0:\\home\\" + user, "~");
-            } else
+            }
+            else
             {
                 shownCurrentDir = currentDir;
             }
@@ -47,12 +48,14 @@ namespace Lynox.ConsoleMode
                             Console.Write(' ');
                             Console.CursorLeft--;
                             command = command.Remove(command.Length - 1, 1);
-                        } else
+                        }
+                        else
                         {
                             Console.CursorLeft++;
                             Console.CursorLeft--;
                         }
-                    } else if (key.Key == ConsoleKey.Tab)
+                    }
+                    else if (key.Key == ConsoleKey.Tab)
                     {
                         //change soon
                         command += "    ";
@@ -72,10 +75,11 @@ namespace Lynox.ConsoleMode
 
         public static void exec(string command)
         {
-            if (command == null || command == "" || command == " " || command.Split(' ').Length <= 0)
+            var paramArray = command.Split(' ');
+            if (command == null || command == "" || command == " " || paramArray.Length <= 0)
                 return;
 
-            switch (command.Split(' ')[0].ToLower())
+            switch (paramArray[0])
             {
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -106,17 +110,19 @@ namespace Lynox.ConsoleMode
                     Console.Write('\n');
                     break;
                 case "lyno":
-                    if (command.Split(' ').Length == 2)
+                    if (paramArray.Length == 2)
                     {
-                        if (File.Exists(currentDir + command.Split(' ')[1]))
+                        if (File.Exists(currentDir + paramArray[1]))
                         {
-                            lyno.lynoStart(File.ReadAllText(currentDir + command.Split(' ')[1]), command.Split(' ')[1]);
-                        } else
-                        {
-                            File.Create(currentDir + command.Split(' ')[1]);
-                            lyno.lynoStart(File.ReadAllText(currentDir + command.Split(' ')[1]), command.Split(' ')[1]);
+                            lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
                         }
-                    } else
+                        else
+                        {
+                            File.Create(currentDir + paramArray[1]);
+                            lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
+                        }
+                    }
+                    else
                     {
                         lyno.lynoStart();
                     }
@@ -183,23 +189,23 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 case "cat":
-                    if (!(command.Split(' ').Length > 1))
+                    if (!(paramArray.Length > 1))
                         break;
-                    Console.WriteLine(File.ReadAllText(currentDir + command.Split(' ')[1]));
+                    Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
                     break;
                 case "sef":
 
-                    if ((command.Split(' ').Length > 1))
+                    if ((paramArray.Length > 1))
                     {
 
-                        if (command.Split(' ')[1].ToLower() == "assemble")
+                        if (paramArray[1].ToLower() == "assemble")
                         {
                             var sefexe = Console.ReadLine();
 
                             SEF_CPU.Assemble(sefexe);
 
                         }
-                        else if (command.Split(' ')[1].ToLower() == "showregs")
+                        else if (paramArray[1].ToLower() == "showregs")
                         {
 
                             Console.WriteLine($"AX: {SEF_CPU.Regs.AX}");

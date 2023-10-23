@@ -71,10 +71,11 @@ namespace Lynox.ConsoleMode
 
         public static void exec(string command)
         {
-            if (command == null || command == "" || command == " " || command.Split(' ').Length <= 0)
+            var paramArray = command.Split(' ');
+            if (command == null || command == "" || command == " " || paramArray.Length <= 0)
                 return;
 
-            switch (command.Split(' ')[0])
+            switch (paramArray[0])
             {
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -105,15 +106,15 @@ namespace Lynox.ConsoleMode
                     Console.Write('\n');
                     break;
                 case "lyno":
-                    if (command.Split(' ').Length == 2)
+                    if (paramArray.Length == 2)
                     {
-                        if (File.Exists(currentDir + command.Split(' ')[1]))
+                        if (File.Exists(currentDir + paramArray[1]))
                         {
-                            lyno.lynoStart(File.ReadAllText(currentDir + command.Split(' ')[1]), command.Split(' ')[1]);
+                            lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
                         } else
                         {
-                            File.Create(currentDir + command.Split(' ')[1]);
-                            lyno.lynoStart(File.ReadAllText(currentDir + command.Split(' ')[1]), command.Split(' ')[1]);
+                            File.Create(currentDir + paramArray[1]);
+                            lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
                         }
                     } else
                     {
@@ -182,9 +183,9 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 case "cat":
-                    if (!(command.Split(' ').Length > 1))
+                    if (!(paramArray.Length > 1))
                         break;
-                    Console.WriteLine(File.ReadAllText(currentDir + command.Split(' ')[1]));
+                    Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

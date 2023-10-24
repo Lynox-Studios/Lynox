@@ -189,6 +189,10 @@ namespace Lynox.ConsoleMode
                         Console.WriteLine("Can't make a file.");
                     }
                     break;
+                case "cl":
+                case "clear":
+                    Console.Clear();
+                    break;
                 case "cat":
                     if (!(paramArray.Length > 1))
                         break;

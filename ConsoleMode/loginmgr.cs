@@ -21,7 +21,6 @@ namespace Lynox.ConsoleMode
             Console.Write(SystemData.OSName);
             Console.ResetColor();
             Console.WriteLine("!");
-
             username:
             Console.Write("Username: ");
             Console.ForegroundColor = ConsoleColor.Green;
@@ -46,7 +45,7 @@ namespace Lynox.ConsoleMode
                 Console.WriteLine(new String('*', passwd.Length));
                 Console.ResetColor();
                 Console.WriteLine("Invalid password!");
-                goto password;
+                //goto password;
             }
             Console.CursorTop--;
             Console.CursorLeft += ("Password: ").Length + passwd.Length;

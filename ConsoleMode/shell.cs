@@ -115,6 +115,7 @@ namespace Lynox.ConsoleMode
                         if (File.Exists(currentDir + paramArray[1]))
                         {
                             lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
+
                         }
                         else
                         {
@@ -222,7 +223,6 @@ namespace Lynox.ConsoleMode
                     {
                         Console.WriteLine("SEF V0.1");
                     }
-
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

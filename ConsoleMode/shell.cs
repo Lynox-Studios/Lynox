@@ -1,4 +1,5 @@
 ﻿using Lynox.ConsoleMode.ConsoleUtils;
+using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,8 @@ namespace Lynox.ConsoleMode
             if (currentDir.StartsWith("0:\\home\\" + user))
             {
                 shownCurrentDir = currentDir.Replace("0:\\home\\" + user, "~");
-            } else
+            }
+            else
             {
                 shownCurrentDir = currentDir;
             }
@@ -46,12 +48,14 @@ namespace Lynox.ConsoleMode
                             Console.Write(' ');
                             Console.CursorLeft--;
                             command = command.Remove(command.Length - 1, 1);
-                        } else
+                        }
+                        else
                         {
                             Console.CursorLeft++;
                             Console.CursorLeft--;
                         }
-                    } else if (key.Key == ConsoleKey.Tab)
+                    }
+                    else if (key.Key == ConsoleKey.Tab)
                     {
                         //change soon
                         command += "    ";
@@ -75,7 +79,7 @@ namespace Lynox.ConsoleMode
             if (command == null || command == "" || command == " " || paramArray.Length <= 0)
                 return;
 
-            switch (paramArray[0])
+            switch (paramArray[0].ToLower())
             {
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -111,12 +115,15 @@ namespace Lynox.ConsoleMode
                         if (File.Exists(currentDir + paramArray[1]))
                         {
                             lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
-                        } else
+
+                        }
+                        else
                         {
                             File.Create(currentDir + paramArray[1]);
                             lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
                         }
-                    } else
+                    }
+                    else
                     {
                         lyno.lynoStart();
                     }
@@ -186,6 +193,36 @@ namespace Lynox.ConsoleMode
                     if (!(paramArray.Length > 1))
                         break;
                     Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
+                    break;
+                case "sef":
+
+                    if ((paramArray.Length > 1))
+                    {
+
+                        if (paramArray[1].ToLower() == "assemble")
+                        {
+                            var sefexe = Console.ReadLine();
+
+                            SEF_CPU.Assemble(sefexe);
+
+                        }
+                        else if (paramArray[1].ToLower() == "showregs")
+                        {
+
+                            Console.WriteLine($"AX: {SEF_CPU.Regs.AX}");
+                            Console.WriteLine($"BX: {SEF_CPU.Regs.BX}");
+                            Console.WriteLine($"CX: {SEF_CPU.Regs.CX}");
+                            Console.WriteLine($"DI: {SEF_CPU.Regs.DI}");
+                            Console.WriteLine($"SI: {SEF_CPU.Regs.SI}");
+                            Console.WriteLine($"SP: {SEF_CPU.Regs.SP}");
+
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("SEF V0.1");
+                    }
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

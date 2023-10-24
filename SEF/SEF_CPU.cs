@@ -512,6 +512,7 @@ namespace Lynox.SEF.CPU
 
                             Console.WriteLine(prl);
                             break;
+                        case "DEF":
                         case "FUNCTION":
 
                             if (args.Length == 2)

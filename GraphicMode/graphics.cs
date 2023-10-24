@@ -13,8 +13,7 @@ namespace Lynox.GraphicMode
     {
         public static void entry()
         {
-            Booting.diagPrint("OK", "Entered Graphical mode");
-            Thread.Sleep(500);
+            ConsoleMode.console.entry();
         }
     }
 }

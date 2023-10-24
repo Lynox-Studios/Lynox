@@ -115,6 +115,7 @@ namespace Lynox.ConsoleMode
                         if (File.Exists(currentDir + paramArray[1]))
                         {
                             lyno.lynoStart(File.ReadAllText(currentDir + paramArray[1]), paramArray[1]);
+
                         }
                         else
                         {
@@ -128,17 +129,24 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 case "cd":
-                    if (command.StartsWith("cd ..."))
+                    if (paramArray.Length > 1)
                     {
-                        currentDir = "0:\\";
-                    }
-                    if (Directory.Exists(command.Replace("cd ", currentDir)))
-                    {
-                        currentDir += command.Replace("cd ", "") + "\\";
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Directory!");
+                        if (paramArray[1] == "...")
+                        {
+                            currentDir = "0:\\";
+                        } else if (paramArray[1] == ".." && currentDir.Split('\\').Length > 1)
+                        {
+                            currentDir = currentDir.TrimEnd(currentDir.Split('\\')[currentDir.Length - 1].ToCharArray());
+                        }
+
+                        if (Directory.Exists(command.Replace("cd ", currentDir)))
+                        {
+                            currentDir += command.Replace("cd ", "") + "\\";
+                        }
+                        else
+                        {
+                            Console.WriteLine("-lash: " + command + ": No such file or directory");
+                        }
                     }
                     break;
                 case "rmdir":
@@ -188,6 +196,10 @@ namespace Lynox.ConsoleMode
                         Console.WriteLine("Can't make a file.");
                     }
                     break;
+                case "cl":
+                case "clear":
+                    Console.Clear();
+                    break;
                 case "cat":
                     if (!(paramArray.Length > 1))
                         break;
@@ -203,6 +215,12 @@ namespace Lynox.ConsoleMode
                             var sefexe = Console.ReadLine();
 
                             SEF_CPU.Assemble(sefexe);
+
+                        }
+                        else if (paramArray[1].ToLower() == "assemblef")
+                        {
+
+                            SEF_CPU.Assemble(currentDir+paramArray[2], true);
 
                         }
                         else if (paramArray[1].ToLower() == "showregs")
@@ -222,7 +240,6 @@ namespace Lynox.ConsoleMode
                     {
                         Console.WriteLine("SEF V0.1");
                     }
-
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;

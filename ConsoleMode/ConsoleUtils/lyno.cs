@@ -149,14 +149,14 @@ namespace Lynox.ConsoleMode.ConsoleUtils
                     saved = true;
                     if (fileName != "Untitled")
                     {
-                        File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer);
+                        File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
                     }
                     else
                     {
                         Console.Clear();
                         Console.Write("Enter filename (with extension): ");
                         fileName = Console.ReadLine();
-                        File.WriteAllText(shell.currentDir + fileName, buffer);
+                        File.WriteAllText(shell.currentDir + fileName, buffer.Remove(buffer.Length - 1, 1));
                         goto goBackToLoop;
                     }
                 }
@@ -187,13 +187,13 @@ namespace Lynox.ConsoleMode.ConsoleUtils
                             {
                                 if (fileName != "Untitled")
                                 {
-                                    File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer);
+                                    File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
                                 }
                                 else
                                 {
                                     Console.Write("Enter filename (with extension): ");
                                     var name = Console.ReadLine();
-                                    File.WriteAllText(shell.currentDir + name, buffer);
+                                    File.WriteAllText(shell.currentDir + name, buffer.Remove(buffer.Length - 1, 1));
                                 }
                                 return;
                             }

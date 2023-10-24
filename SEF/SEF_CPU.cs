@@ -32,7 +32,16 @@ namespace Lynox.SEF.CPU
 
             if (IsFile)
             {
-                code = File.ReadAllText(code);
+
+                if (File.Exists(code))
+                {
+                    code = File.ReadAllText(code);
+                }
+                else
+                {
+                    Console.WriteLine("File not found");
+                    return;
+                }
             }
 
             string[] splittedcode = code.Split('\n');
@@ -121,6 +130,7 @@ namespace Lynox.SEF.CPU
 
                             break;
                         case "CALL":
+                            SEF_CPU.Assemble(funcKeys[args[1]]);
                             break;
                         case "AAA":
                             break;
@@ -502,7 +512,7 @@ namespace Lynox.SEF.CPU
 
                             Console.WriteLine(prl);
                             break;
-                        case "DEF":
+                        case "FUNCTION":
 
                             if (args.Length == 2)
                             {
@@ -523,6 +533,7 @@ namespace Lynox.SEF.CPU
 
                             }
                             IsFuction = false;
+                            Cfunction = "";
                             break;
                         default:
                             break;
@@ -530,6 +541,8 @@ namespace Lynox.SEF.CPU
                 }
 
             }
+
+            return;
 
         }
 

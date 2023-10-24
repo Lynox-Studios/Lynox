@@ -206,6 +206,12 @@ namespace Lynox.ConsoleMode
                             SEF_CPU.Assemble(sefexe);
 
                         }
+                        else if (paramArray[1].ToLower() == "assemblef")
+                        {
+
+                            SEF_CPU.Assemble(currentDir+paramArray[2], true);
+
+                        }
                         else if (paramArray[1].ToLower() == "showregs")
                         {
 

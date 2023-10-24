@@ -205,6 +205,9 @@ namespace Lynox.ConsoleMode
                         break;
                     Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
                     break;
+                case "gui":
+                    GraphicMode.graphics.entry();
+                    break;
                 case "sef":
 
                     if ((paramArray.Length > 1))
@@ -223,6 +226,12 @@ namespace Lynox.ConsoleMode
                             SEF_CPU.Assemble(currentDir+paramArray[2], true);
 
                         }
+                        else if (paramArray[1].ToLower() == "mexe")
+                        {
+
+                            SEF_CPU.MakeExecutable(currentDir + paramArray[2], currentDir + paramArray[3]);
+
+                        }
                         else if (paramArray[1].ToLower() == "showregs")
                         {
 
@@ -234,7 +243,7 @@ namespace Lynox.ConsoleMode
                             Console.WriteLine($"SP: {SEF_CPU.Regs.SP}");
 
                         }
-
+                        
                     }
                     else
                     {

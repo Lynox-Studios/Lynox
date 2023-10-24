@@ -1,4 +1,5 @@
 ﻿using Cosmos.HAL;
+using Cosmos.System.Graphics;
 using Lynox.SEF.UTILS;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,27 @@ namespace Lynox.SEF.CPU
         public static Dictionary<string, string> funcKeys = new Dictionary<string, string>();
 
         //test of assemblying, it just parses the code as keys, in the future it will convert the code into byte code
+        
+        public static void MakeExecutable(string code,string ExecutableNameWithExtension)
+        {
+
+            if (File.Exists(code))
+            {
+                code = File.ReadAllText(code);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+                return;
+            }
+
+            string MaschineCode = SEF_UTILS.Encrypt(code);
+            string HexCode = SEF_UTILS.StringToHex(MaschineCode);
+            byte[] bytescode = SEF_UTILS.HexStringToBytes(HexCode);
+            File.WriteAllBytes(ExecutableNameWithExtension,bytescode);
+
+        }
+
         public static void Assemble(string code,bool IsFile = false)
         {
 

@@ -15,10 +15,10 @@ namespace Lynox
         protected override void Run()
         {
 
-            if (!Directory.Exists("0:\\bin"))
+            if (!File.Exists("0:\\system\\bin_enabled.conf"))
             {
                 Booting.diagPrint("FAILED", "Your system has invalid/broken binaries, you will be sent to mode config recovery.");
-                Recovery.ConfigRecovery.START();
+                SystemUtils.FirstTimeSetup.FreshSetup();
             }
 
             if (!File.Exists("0:\\system\\system_mode.conf"))

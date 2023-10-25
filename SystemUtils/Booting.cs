@@ -21,6 +21,7 @@ namespace Lynox.SystemUtils
             Console.Clear();
             diagPrint("OK", "Booter");
             diagPrint("OK", "LynoxSystem");
+            SystemData.init();
         }
 
         public static void diagPrint(string status,  string proc)

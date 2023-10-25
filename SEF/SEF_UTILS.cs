@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Lynox.SEF.CPU.SEF_CPU;
 
 namespace Lynox.SEF.UTILS
 {
@@ -65,6 +66,54 @@ namespace Lynox.SEF.UTILS
             foreach (byte b in bytes)
                 sb.Append(b.ToString());
             return sb.ToString();
+        }
+
+        public static decimal ParseArgs(string argument)
+        {
+
+            switch (argument)
+            {
+
+                case "AX":
+                    return Regs.AX;
+                    break;
+                case "CX":
+                    return Regs.CX;
+                    break;
+                case "BX":
+                    return Regs.BX;
+                    break;
+                case "SP":
+                    return Regs.SP;
+                    break;
+                case "BP":
+                    return Regs.BP;
+                    break;
+                case "SI":
+                    return Regs.SI;
+                    break;
+                case "DI":
+                    return Regs.DI;
+                    break;
+                default:
+
+                    decimal o;
+
+                    if (decimal.TryParse(argument, out o))
+                    {
+
+                        return o;
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{argument.ToUpper()} is not a recognized register");
+                        return 0;
+                    }
+
+                    break;
+            }
+
         }
 
     }

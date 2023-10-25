@@ -95,9 +95,11 @@ namespace Lynox.SystemUtils
 
             try
             {
-                Booting.diagPrint("OK", "Creating bin directory. [1/2]");
+                Booting.diagPrint("OK", "Creating bin directory. [1/3]");
                 Directory.CreateDirectory("0:\\bin\\");
-                Booting.diagPrint("OK", "Settings links for bin directory. [2/2]");
+                Booting.diagPrint("OK", "Copyng binaries. [2/3]");
+                File.WriteAllText("0:\\bin\\", "");
+                Booting.diagPrint("OK", "Settings links for bin directory. [3/3]");
                 File.WriteAllText("0:\\system\\bin_enabled.conf", "ENABLED");
             }
             catch (Exception)

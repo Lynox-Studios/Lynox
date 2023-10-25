@@ -16,11 +16,13 @@ namespace Lynox.GraphicMode
     internal class graphics
     {
 
+        public static bool isgui = false;
         public static Canvas canvas;
 
         public static void entry(uint collumns = 1280,uint rows = 720)
         {
 
+            isgui = true;
             canvas = FullScreenCanvas.GetFullScreenCanvas(new Mode(collumns,rows,ColorDepth.ColorDepth32));
             MouseManager.ScreenWidth = collumns;
             MouseManager.ScreenHeight = rows;
@@ -35,10 +37,10 @@ namespace Lynox.GraphicMode
             while (true)
             {
                 canvas.Clear(Color.DodgerBlue);
-                canvas.DrawFilledRectangle(Color.DarkGray, 0, (int)canvas.Mode.Height - 30, (int)canvas.Mode.Width, 30);
-                UpdateMouse();
-                canvas.Display();
-                Heap.Collect();
+                //canvas.DrawFilledRectangle(Color.DarkGray, 0, (int)canvas.Mode.Height - 30, (int)canvas.Mode.Width, 30);
+                //UpdateMouse();
+                //canvas.Display();
+                //Heap.Collect();
             }
 
         }

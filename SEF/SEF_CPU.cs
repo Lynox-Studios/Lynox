@@ -1,8 +1,10 @@
 ﻿using Cosmos.HAL;
 using Cosmos.System.Graphics;
+using Lynox.GraphicMode;
 using Lynox.SEF.UTILS;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -101,7 +103,7 @@ namespace Lynox.SEF.CPU
                 {
                     string[] args = item.Split(' ', ',');
 
-                    switch (args[0])
+                    switch (args[0].ToUpper())
                     {
                         case "ADD":
 
@@ -577,6 +579,18 @@ namespace Lynox.SEF.CPU
                             }
                             IsFuction = false;
                             Cfunction = "";
+                            break;
+                        case "RECT":
+
+                            graphics.canvas.DrawFilledRectangle(Color.FromName(args[5]), (int)SEF_UTILS.ParseArgs(args[1]), (int)SEF_UTILS.ParseArgs(args[2]), (int)SEF_UTILS.ParseArgs(args[3]), (int)SEF_UTILS.ParseArgs(args[4]));
+                            break;
+                        case "INITGUI":
+
+                            if (graphics.isgui == false)
+                            {
+                                graphics.entry();
+                            }
+
                             break;
                         default:
                             break;

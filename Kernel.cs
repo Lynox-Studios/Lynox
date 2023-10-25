@@ -20,7 +20,11 @@ namespace Lynox
                 Booting.diagPrint("FAILED", "Your system has invalid/broken binaries, you will be sent to mode config recovery.");
                 SystemUtils.FirstTimeSetup.FreshSetup();
             }
-
+            //else if (Directory.GetFiles("0:\\bin").Length !> 0)
+            //{
+            //    Booting.diagPrint("FAILED", "Your system has invalid/broken binaries, you will be sent to mode config recovery.");
+            //    SystemUtils.FirstTimeSetup.FreshSetup();
+            //}
             if (!File.Exists("0:\\system\\system_mode.conf"))
             {
                 Booting.diagPrint("FAILED", "Your system has invalid/broken configs, you will be sent to mode config recovery.");

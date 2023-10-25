@@ -1,4 +1,5 @@
-﻿using Lynox.ConsoleMode.ConsoleUtils;
+﻿using Cosmos.HAL;
+using Lynox.ConsoleMode.ConsoleUtils;
 using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
@@ -203,6 +204,8 @@ namespace Lynox.ConsoleMode
                     break;
                 case "cat":
                     if (!(paramArray.Length > 1))
+                        break;
+                    if (!File.Exists(currentDir + paramArray[1]))
                         break;
                     Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
                     break;

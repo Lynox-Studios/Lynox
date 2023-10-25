@@ -1,5 +1,4 @@
-﻿using Cosmos.Core.Memory;
-using Cosmos.System;
+﻿using Cosmos.System;
 using Cosmos.System.Graphics;
 using Lynox.ConsoleMode;
 using Lynox.SystemUtils;
@@ -26,9 +25,9 @@ namespace Lynox.GraphicMode
             canvas = FullScreenCanvas.GetFullScreenCanvas(new Mode(collumns,rows,ColorDepth.ColorDepth32));
             MouseManager.ScreenWidth = collumns;
             MouseManager.ScreenHeight = rows;
-
-            ProcessUpdates();
-
+            canvas.Clear(Color.DodgerBlue);
+            //ProcessUpdates();
+            canvas.Display();
         }
 
         static void ProcessUpdates()
@@ -36,11 +35,11 @@ namespace Lynox.GraphicMode
 
             while (true)
             {
-                canvas.Clear(Color.DodgerBlue);
+                //canvas.Clear(Color.DodgerBlue);
                 //canvas.DrawFilledRectangle(Color.DarkGray, 0, (int)canvas.Mode.Height - 30, (int)canvas.Mode.Width, 30);
                 //UpdateMouse();
-                //canvas.Display();
-                //Heap.Collect();
+                canvas.Display();
+                
             }
 
         }

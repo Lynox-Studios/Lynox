@@ -103,6 +103,9 @@ namespace Lynox.SEF.CPU
                 {
                     string[] args = item.Split(' ', ',');
 
+
+                    //Console.WriteLine(args[0].ToUpper());
+
                     switch (args[0].ToUpper())
                     {
                         case "ADD":
@@ -581,8 +584,8 @@ namespace Lynox.SEF.CPU
                             Cfunction = "";
                             break;
                         case "RECT":
-
-                            graphics.canvas.DrawFilledRectangle(Color.FromName(args[5]), (int)SEF_UTILS.ParseArgs(args[1]), (int)SEF_UTILS.ParseArgs(args[2]), (int)SEF_UTILS.ParseArgs(args[3]), (int)SEF_UTILS.ParseArgs(args[4]));
+                            if (graphics.isgui)
+                                graphics.canvas.DrawFilledRectangle(Color.FromName(args[5]), (int)SEF_UTILS.ParseArgs(args[1]), (int)SEF_UTILS.ParseArgs(args[2]), (int)SEF_UTILS.ParseArgs(args[3]), (int)SEF_UTILS.ParseArgs(args[4]));
                             break;
                         case "INITGUI":
 

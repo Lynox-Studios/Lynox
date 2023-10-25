@@ -46,7 +46,7 @@ namespace Lynox.ConsoleMode
                 Console.WriteLine(new String('*', passwd.Length));
                 Console.ResetColor();
                 Console.WriteLine("Invalid password!");
-                //goto password;
+                goto password;
             }
             
             Console.CursorTop--;

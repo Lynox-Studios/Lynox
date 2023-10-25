@@ -33,7 +33,7 @@ namespace Lynox.ConsoleMode
             while (true)
             {
                 currentDirUpdater(user);
-                Console.Write("[" + user + "@Lynox " + shownCurrentDir + "]$ ");
+                Console.Write("[" + user + "@" + SystemData.OSName + " " + shownCurrentDir + "]$ ");
                 var command = "";
 
                 var prevKeyChar = '0';

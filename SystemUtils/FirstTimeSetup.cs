@@ -92,6 +92,18 @@ namespace Lynox.SystemUtils
             {
                 Booting.diagPrint("FAILED", "System cannot make user directories! [WARNING: This may break the system.]");
             }
+
+            try
+            {
+                Booting.diagPrint("OK", "Creating bin directory. [1/2]");
+                Directory.CreateDirectory("0:\\bin\\");
+                Booting.diagPrint("OK", "Settings links for bin directory. [2/2]");
+                File.WriteAllText("0:\\system\\bin_enabled.conf", "ENABLED");
+            }
+            catch (Exception)
+            {
+                Booting.diagPrint("FAILED", "System cannot generate bin directories. [WARNING: This will break the system.]");
+            }
             cs.Power.Reboot();
         }
     }

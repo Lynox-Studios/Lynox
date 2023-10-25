@@ -42,10 +42,30 @@ namespace Lynox.SEF.CPU
                 return;
             }
 
-            string MaschineCode = SEF_UTILS.Encrypt(code);
-            string HexCode = SEF_UTILS.StringToHex(MaschineCode);
-            byte[] bytescode = SEF_UTILS.HexStringToBytes(HexCode);
-            File.WriteAllBytes(ExecutableNameWithExtension,bytescode);
+            code = code.Replace('\n', ';');
+
+            Console.WriteLine(code);
+            File.WriteAllText(ExecutableNameWithExtension, SEF_UTILS.Encrypt(code));
+            Console.WriteLine("executable generated");
+            Console.WriteLine(SEF_UTILS.Encrypt(code));
+        }
+
+        public static void Execute(string code)
+        {
+
+            if (File.Exists(code))
+            {
+                code = File.ReadAllText(code);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+                return;
+            }
+            string deob = SEF_UTILS.Decrypt(code);
+            deob = deob.Replace(";","\n");
+
+            Assemble(deob);
 
         }
 

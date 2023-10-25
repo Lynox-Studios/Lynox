@@ -36,7 +36,7 @@ namespace Lynox.SEF.UTILS
         {
             StringBuilder sb = new StringBuilder();
             foreach (char c in input)
-                sb.Append(Convert.ToInt32(c).ToString("x"));
+                sb.Append(Convert.ToInt32(c).ToString());
             return sb.ToString();
         }
 
@@ -48,11 +48,22 @@ namespace Lynox.SEF.UTILS
                              .ToArray();
         }
 
+        public static string HexStringToString(string hex)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hex.Length; i += 2)
+            {
+                string hexChar = hex.Substring(i, 2);
+                sb.Append((char)Convert.ToInt32(hexChar, 16));
+            }
+            return sb.ToString();
+        }
+
         public static string ToHexString(byte[] bytes)
         {
             StringBuilder sb = new StringBuilder();
             foreach (byte b in bytes)
-                sb.Append(b.ToString("X2"));
+                sb.Append(b.ToString());
             return sb.ToString();
         }
 

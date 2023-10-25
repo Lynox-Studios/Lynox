@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using static Cosmos.HAL.BlockDevice.ATA_PIO;
@@ -232,6 +233,12 @@ namespace Lynox.ConsoleMode
                             SEF_CPU.MakeExecutable(currentDir + paramArray[2], currentDir + paramArray[3]);
 
                         }
+                        else if (paramArray[1].ToLower() == "run")
+                        {
+
+                            SEF_CPU.Execute(currentDir + paramArray[2]);
+
+                        }
                         else if (paramArray[1].ToLower() == "showregs")
                         {
 
@@ -251,6 +258,13 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 default:
+
+                    if (File.Exists(currentDir + paramArray[0].Replace("./","")) && paramArray[0].StartsWith("./"))
+                    {
+                        SEF_CPU.Execute(currentDir + paramArray[0].Replace("./", ""));
+                        break;
+                    }
+                    
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("lash");
                     Console.ResetColor();

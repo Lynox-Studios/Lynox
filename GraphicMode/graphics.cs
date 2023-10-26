@@ -1,6 +1,8 @@
 ﻿using Cosmos.System;
 using Cosmos.System.Graphics;
 using Lynox.ConsoleMode;
+using Lynox.SEF.CLI;
+using Lynox.SEF.CPU;
 using Lynox.SystemUtils;
 using System;
 using System.Collections.Generic;
@@ -26,12 +28,14 @@ namespace Lynox.GraphicMode
             MouseManager.ScreenWidth = collumns;
             MouseManager.ScreenHeight = rows;
             canvas.Clear(Color.DodgerBlue);
-            //ProcessUpdates();
+            ProcessUpdates();
             canvas.Display();
         }
 
         static void ProcessUpdates()
         {
+
+            SEF_CPU.Assemble("RECT 0,690,1280,30,Gray");
 
             while (true)
             {

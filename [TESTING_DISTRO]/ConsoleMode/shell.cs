@@ -1,4 +1,5 @@
-﻿using Lynox.ConsoleMode.ConsoleUtils;
+﻿using Cosmos.HAL;
+using TestDistro.ConsoleMode.ConsoleUtils;
 using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,10 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using static Cosmos.HAL.BlockDevice.ATA_PIO;
+using Lynox;
+using TestDistro.GraphicMode;
 
-namespace Lynox.ConsoleMode
+namespace TestDistro.ConsoleMode
 {
     internal class shell
     {
@@ -203,6 +206,8 @@ namespace Lynox.ConsoleMode
                     break;
                 case "cat":
                     if (!(paramArray.Length > 1))
+                        break;
+                    if (!File.Exists(currentDir + paramArray[1]))
                         break;
                     Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
                     break;

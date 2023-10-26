@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Channels;
+using Lynox;
 
-namespace Lynox.ConsoleMode.ConsoleUtils
+namespace TestDistro.ConsoleMode.ConsoleUtils
 {
     public static class lyno
     {

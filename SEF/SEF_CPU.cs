@@ -1,6 +1,6 @@
 ﻿using Cosmos.HAL;
 using Cosmos.System.Graphics;
-using Lynox.GraphicMode;
+using TestDistro.GraphicMode;
 using Lynox.SEF.UTILS;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestDistro;
 
 namespace Lynox.SEF.CPU
 {

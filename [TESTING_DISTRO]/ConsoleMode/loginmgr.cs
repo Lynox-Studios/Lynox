@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lynox;
 
-namespace Lynox.ConsoleMode
+namespace TestDistro.ConsoleMode
 {
     internal class loginmgr
     {

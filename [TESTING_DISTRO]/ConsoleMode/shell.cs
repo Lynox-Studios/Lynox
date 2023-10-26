@@ -11,11 +11,16 @@ using System.Threading.Tasks;
 using static Cosmos.HAL.BlockDevice.ATA_PIO;
 using Lynox;
 using TestDistro.GraphicMode;
+using Lynox.SystemUtils;
 
 namespace TestDistro.ConsoleMode
 {
     internal class shell
     {
+
+        //todelete
+        public static ProgressBar pb;
+        //end todelete
         public static string currentDir = "0:\\home\\";
         public static string shownCurrentDir = "~";
 
@@ -220,6 +225,9 @@ namespace TestDistro.ConsoleMode
                 case "cl":
                 case "clear":
                     Console.Clear();
+                    break;
+                case "pb":
+                    pb = Booting.Progressbar(5,10);
                     break;
                 case "cat":
                     if (!(paramArray.Length > 1))

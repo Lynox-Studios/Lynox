@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lynox.GraphicMode
+namespace TestDistro.GraphicMode
 {
     internal class graphics
     {
@@ -43,7 +43,7 @@ namespace Lynox.GraphicMode
                 //canvas.DrawFilledRectangle(Color.DarkGray, 0, (int)canvas.Mode.Height - 30, (int)canvas.Mode.Width, 30);
                 //UpdateMouse();
                 canvas.Display();
-                
+
             }
 
         }

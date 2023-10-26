@@ -1,5 +1,5 @@
 ﻿using Cosmos.HAL;
-using Lynox.ConsoleMode.ConsoleUtils;
+using TestDistro.ConsoleMode.ConsoleUtils;
 using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
@@ -9,8 +9,10 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using static Cosmos.HAL.BlockDevice.ATA_PIO;
+using Lynox;
+using TestDistro.GraphicMode;
 
-namespace Lynox.ConsoleMode
+namespace TestDistro.ConsoleMode
 {
     internal class shell
     {

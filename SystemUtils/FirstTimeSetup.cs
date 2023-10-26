@@ -98,7 +98,7 @@ namespace Lynox.SystemUtils
                 Booting.diagPrint("OK", "Creating bin directory. [1/3]");
                 Directory.CreateDirectory("0:\\bin\\");
                 Booting.diagPrint("OK", "Copyng binaries. [2/3]");
-                File.WriteAllText("0:\\bin\\", "");
+                File.WriteAllText("0:\\bin\\GUITB.lex", "lqlwjxl;dgg DA 720;vxe DA 30;uhfw 0 DA 1280 30 Judb;");
                 Booting.diagPrint("OK", "Settings links for bin directory. [3/3]");
                 File.WriteAllText("0:\\system\\bin_enabled.conf", "ENABLED");
             }

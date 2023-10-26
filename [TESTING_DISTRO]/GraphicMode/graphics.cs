@@ -1,6 +1,6 @@
 ﻿using Cosmos.System;
 using Cosmos.System.Graphics;
-using Lynox.ConsoleMode;
+using TestDistro.ConsoleMode;
 using Lynox.SEF.CLI;
 using Lynox.SEF.CPU;
 using Lynox.SystemUtils;
@@ -35,7 +35,7 @@ namespace TestDistro.GraphicMode
         static void ProcessUpdates()
         {
 
-            SEF_CPU.Assemble("RECT 0,690,1280,30,Gray");
+            SEF_CPU.Execute("0:\\bin\\GUITB.lex");
 
             while (true)
             {

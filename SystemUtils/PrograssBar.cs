@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestDistro.ConsoleMode;
 
 namespace Lynox.SystemUtils
 {
@@ -41,12 +42,12 @@ namespace Lynox.SystemUtils
         {
 
             var pcpos = Console.GetCursorPosition();
-            Console.SetCursorPosition(cursorpos.left,cursorpos.top);
+            Console.SetCursorPosition(cursorpos.left, cursorpos.top);
             Console.Write('[');
             for (int i = 0; i < max; i++)
             {
 
-                if (i <= percentage)
+                if ((i + 1) <= percentage)
                 {
 
                     Console.Write('|');
@@ -60,7 +61,6 @@ namespace Lynox.SystemUtils
             }
             Console.Write(']');
             Console.SetCursorPosition(pcpos.Left,pcpos.Top);
-
         }
 
     }

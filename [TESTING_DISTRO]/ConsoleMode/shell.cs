@@ -227,7 +227,22 @@ namespace TestDistro.ConsoleMode
                     Console.Clear();
                     break;
                 case "pb":
-                    pb = Booting.Progressbar(5,10);
+
+                    if (paramArray.Length == 1)
+                    {
+                        pb.Increment(1);
+                    }
+                    else if (paramArray.Length == 2)
+                    {
+                        pb.Set(int.Parse(paramArray[1]));
+                    }
+                    else if (paramArray.Length == 3)
+                    {
+                        pb = Booting.Progressbar(int.Parse(paramArray[1]), int.Parse(paramArray[2]));
+                        pb.Draw();
+                    }
+
+                    Console.WriteLine();
                     break;
                 case "cat":
                     if (!(paramArray.Length > 1))

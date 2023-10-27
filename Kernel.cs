@@ -34,10 +34,10 @@ namespace Lynox
             }
             switch (File.ReadAllText("0:\\system\\system_mode.conf")) {
                 case "CONSOLE":
-                    ConsoleMode.console.entry();
+                    TestDistro.ConsoleMode.console.entry();
                     break;
                 case "GRAPHICAL":
-                    GraphicMode.graphics.entry();
+                    TestDistro.GraphicMode.graphics.entry();
                     break;
                 default:
                     Booting.diagPrint("FAILED", "Your system has invalid/broken configs, you will be sent to mode config recovery.");

@@ -22,6 +22,12 @@ namespace Lynox.SystemUtils
             diagPrint("OK", "Booter");
             diagPrint("OK", "LynoxSystem");
             SystemData.init();
+
+            diagPrint("OK", "System service(s) starting..");
+            foreach (var serv in SystemData.procMgr.ServiceNames)
+            {
+                serv.ServiceStart();
+            }
         }
 
         public static void diagPrint(string status,  string proc)

@@ -26,7 +26,7 @@
     <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Common" Version="0-*" />
-        <PackageReference Include="Cosmos.Core" Version="0.1.0-localbuild20231024030016" />
+        <PackageReference Include="Cosmos.Core" Version="0.1.0-localbuild20231024031359" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.HAL2" Version="0-*" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />

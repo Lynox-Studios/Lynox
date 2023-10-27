@@ -1,6 +1,8 @@
 ﻿using Cosmos.System;
 using Cosmos.System.Graphics;
 using TestDistro.ConsoleMode;
+using Lynox.SEF.CLI;
+using Lynox.SEF.CPU;
 using Lynox.SystemUtils;
 using System;
 using System.Collections.Generic;
@@ -26,12 +28,14 @@ namespace TestDistro.GraphicMode
             MouseManager.ScreenWidth = collumns;
             MouseManager.ScreenHeight = rows;
             canvas.Clear(Color.DodgerBlue);
-            //ProcessUpdates();
+            ProcessUpdates();
             canvas.Display();
         }
 
         static void ProcessUpdates()
         {
+
+            SEF_CPU.Execute("0:\\bin\\GUITB.lex");
 
             while (true)
             {
@@ -39,7 +43,7 @@ namespace TestDistro.GraphicMode
                 //canvas.DrawFilledRectangle(Color.DarkGray, 0, (int)canvas.Mode.Height - 30, (int)canvas.Mode.Width, 30);
                 //UpdateMouse();
                 canvas.Display();
-                
+
             }
 
         }

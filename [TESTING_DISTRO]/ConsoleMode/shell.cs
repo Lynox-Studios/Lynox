@@ -11,11 +11,16 @@ using System.Threading.Tasks;
 using static Cosmos.HAL.BlockDevice.ATA_PIO;
 using Lynox;
 using TestDistro.GraphicMode;
+using Lynox.SystemUtils;
 
 namespace TestDistro.ConsoleMode
 {
     internal class shell
     {
+
+        //todelete
+        public static ProgressBar pb;
+        //end todelete
         public static string currentDir = "0:\\home\\";
         public static string shownCurrentDir = "~";
 
@@ -85,6 +90,23 @@ namespace TestDistro.ConsoleMode
 
             switch (paramArray[0].ToLower())
             {
+                case "?":
+                case "h":
+                case "help":
+                    Console.WriteLine("PAGE 1/1 -----------------------------------------------------\n");
+                    Console.WriteLine("help/h/? - shows this menu");
+                    Console.WriteLine("ls - shows every file/folder in the current/selected directory");
+                    Console.WriteLine("lyno - a simple text editor");
+                    Console.WriteLine("cd - goes to a specified directory");
+                    Console.WriteLine("mkdir - creates a directory");
+                    Console.WriteLine("rmdir - removes a directory");
+                    Console.WriteLine("rm - deletes a file");
+                    Console.WriteLine("touch - creates a file");
+                    Console.WriteLine("cat - reads the content of a file");
+                    Console.WriteLine("sef - assembles assembly code");
+                    Console.WriteLine("\n--------------------------------------------------------------");
+
+                    break;
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
                     foreach (var dirs in Directory.GetDirectories(currentDir))
@@ -203,6 +225,9 @@ namespace TestDistro.ConsoleMode
                 case "cl":
                 case "clear":
                     Console.Clear();
+                    break;
+                case "pb":
+                    pb = Booting.Progressbar(5,10);
                     break;
                 case "cat":
                     if (!(paramArray.Length > 1))

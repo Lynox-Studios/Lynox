@@ -20,7 +20,7 @@
         <OptimizationLevel>2</OptimizationLevel>
         <AllowComments>True</AllowComments>
         <DebugEnabled>False</DebugEnabled>
-        <VMWareEdition>Workstation</VMWareEdition>
+        <VMWareEdition>Player</VMWareEdition>
     </PropertyGroup>
 
     <ItemGroup>

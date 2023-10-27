@@ -13,7 +13,7 @@ namespace Lynox.SystemUtils
         public (int left,int top) cursorpos;
         public int percentage;
 
-        public void Init(int left,int top) { cursorpos.left = left;cursorpos.top = top; }
+        public void Init(int left,int top) { cursorpos.left = left;cursorpos.top = top; Draw(); }
 
         public void Increment(int value = 1)
         {

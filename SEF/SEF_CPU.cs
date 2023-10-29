@@ -16,6 +16,7 @@ namespace Lynox.SEF.CPU
     internal class SEF_CPU
     {
         public SEF_CPU() { }
+        static char[] splits = { ' ', ',' };
         //registers
         //16-bit registers for now
         public static class Regs
@@ -89,7 +90,7 @@ namespace Lynox.SEF.CPU
                 }
             }
 
-            string[] splittedcode = code.Split('\n');
+            string[] splittedcode = code.Split('\n',StringSplitOptions.RemoveEmptyEntries);
 
             string Cfunction = "";
 
@@ -102,8 +103,7 @@ namespace Lynox.SEF.CPU
                 }
                 else
                 {
-                    string[] args = item.Split(' ', ',');
-
+                    string[] args = item.Split(splits, StringSplitOptions.RemoveEmptyEntries);
 
                     //Console.WriteLine(args[0].ToUpper());
 
@@ -201,6 +201,90 @@ namespace Lynox.SEF.CPU
                         case "CLI":
                             break;
                         case "CMC":
+                            break;
+                        case "CMP":
+
+                            decimal cmpto1 = 0,cmpto2 = 0;
+
+                            switch (args[2])
+                            {
+                                case "AX":
+                                    cmpto1 = Regs.AX;
+                                    break;
+                                case "CX":
+                                    cmpto1 = Regs.CX;
+                                    break;
+                                case "BX":
+                                    cmpto1 = Regs.BX;
+                                    break;
+                                case "SP":
+                                    cmpto1 = Regs.SP;
+                                    break;
+                                case "BP":
+                                    cmpto1 = Regs.BP;
+                                    break;
+                                case "SI":
+                                    cmpto1 = Regs.SI;
+                                    break;
+                                case "DI":
+                                    cmpto1 = Regs.DI;
+                                    break;
+                                default:
+
+                                    if (decimal.TryParse(args[2], out cmpto1))
+                                    { }
+                                    else
+                                    {
+                                        Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                    }
+
+                                    break;
+                            }
+
+                            switch (args[2])
+                            {
+                                case "AX":
+                                    cmpto2 = Regs.AX;
+                                    break;
+                                case "CX":
+                                    cmpto2 = Regs.CX;
+                                    break;
+                                case "BX":
+                                    cmpto2 = Regs.BX;
+                                    break;
+                                case "SP":
+                                    cmpto2 = Regs.SP;
+                                    break;
+                                case "BP":
+                                    cmpto2 = Regs.BP;
+                                    break;
+                                case "SI":
+                                    cmpto2 = Regs.SI;
+                                    break;
+                                case "DI":
+                                    cmpto2 = Regs.DI;
+                                    break;
+                                default:
+
+                                    if (decimal.TryParse(args[2], out cmpto2))
+                                    { }
+                                    else
+                                    {
+                                        Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                    }
+
+                                    break;
+                            }
+
+                            if (cmpto1 == cmpto2)
+                            {
+                                SEF_CPU.Assemble(funcKeys[args[3]]);
+                            }
+                            else
+                            {
+                                SEF_CPU.Assemble(funcKeys[args[4]]);
+                            }
+
                             break;
                         case "CMPSB":
                             break;

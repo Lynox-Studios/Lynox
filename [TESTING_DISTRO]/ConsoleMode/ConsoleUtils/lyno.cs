@@ -19,7 +19,7 @@ namespace TestDistro.ConsoleMode.ConsoleUtils
         public static int prevPosX = 0;
         public static int prevPosY = 1;
 
-        public const string version = "v0.1";
+        public const string version = "v0.2";
 
         public static void lynoStart(string textFromFile, string filename)
         {

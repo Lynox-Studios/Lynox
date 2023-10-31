@@ -18,7 +18,7 @@ namespace Lynox.LynoxAPI.SystemFetcher
             var i = 0;
             foreach (var fetched in FetchService.SYSTEM_CONFIG_BUNDLE)
             {
-                Booting.diagPrint("OK", "Fetching " + fetched);
+                Booting.diagPrint("OK", "Fetching " + FetchService.SYSTEM_ABSOLUTE_BUNDLE[i]);
                 FetchService.SYSTEM_CONFIG_BUNDLE.ToList()[i] = File.ReadAllText(FetchService.GiveAbsolutePath(fetched));
                 if (!(FetchService.GiveAbsolutePath(fetched) == "ERROR"))
                     Booting.diagPrint("FAILED", "Unsuccessful fetching of " + fetched);

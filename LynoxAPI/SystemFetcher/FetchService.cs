@@ -55,6 +55,9 @@ namespace Lynox.LynoxAPI.SystemFetcher
         public static string SYSTEM_MODE_CONFIG = "SYSTEM_MODE_CONFIG";
         public static string SYSTEM_CONFIG_BIN_ENABLED = "SYSTEM_CONFIG_BIN_ENABLED";
 
+        public static string[] SYSTEM_ABSOLUTE_BUNDLE = { SYSTEM_CONFIG_FILE_, SYSTEM_USER_PATH_NAME_, SYSTEM_USER_PATH_PASS_,
+                                                        SYSTEM_MODE_CONFIG_, SYSTEM_CONFIG_BIN_ENABLED_ };
+
         public const string SYSTEM_CONFIG_FILE_ = "SYSTEM_CONFIG_FILE";
         public const string SYSTEM_USER_PATH_NAME_ = "SYSTEM_USER_PATH_NAME";
         public const string SYSTEM_USER_PATH_PASS_ = "SYSTEM_USER_PATH_PASS";

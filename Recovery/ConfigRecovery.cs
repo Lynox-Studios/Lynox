@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lynox.SystemUtils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Lynox.Recovery
         public static bool optionConsole = true;
         public static void START()
         {
+
             Console.WriteLine("Please choose your preferred system mode:");
             startPosX = Console.CursorLeft;
             startPosY = Console.CursorTop;

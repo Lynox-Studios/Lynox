@@ -1,17 +1,22 @@
 ﻿using Cosmos.HAL;
+using Cosmos.System.Graphics;
+using TestDistro.GraphicMode;
 using Lynox.SEF.UTILS;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestDistro;
 
 namespace Lynox.SEF.CPU
 {
     internal class SEF_CPU
     {
         public SEF_CPU() { }
+        static char[] splits = { ' ', ',' };
         //registers
         //16-bit registers for now
         public static class Regs
@@ -27,6 +32,47 @@ namespace Lynox.SEF.CPU
         public static Dictionary<string, string> funcKeys = new Dictionary<string, string>();
 
         //test of assemblying, it just parses the code as keys, in the future it will convert the code into byte code
+        
+        public static void MakeExecutable(string code,string ExecutableNameWithExtension)
+        {
+
+            if (File.Exists(code))
+            {
+                code = File.ReadAllText(code);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+                return;
+            }
+
+            code = code.Replace('\n', ';');
+
+            Console.WriteLine(code);
+            File.WriteAllText(ExecutableNameWithExtension, SEF_UTILS.Encrypt(code));
+            Console.WriteLine("executable generated");
+            Console.WriteLine(SEF_UTILS.Encrypt(code));
+        }
+
+        public static void Execute(string code)
+        {
+
+            if (File.Exists(code))
+            {
+                code = File.ReadAllText(code);
+            }
+            else
+            {
+                Console.WriteLine("File not found");
+                return;
+            }
+            string deob = SEF_UTILS.Decrypt(code);
+            deob = deob.Replace(";","\n");
+
+            Assemble(deob);
+
+        }
+
         public static void Assemble(string code,bool IsFile = false)
         {
 
@@ -44,7 +90,7 @@ namespace Lynox.SEF.CPU
                 }
             }
 
-            string[] splittedcode = code.Split('\n');
+            string[] splittedcode = code.Split('\n',StringSplitOptions.RemoveEmptyEntries);
 
             string Cfunction = "";
 
@@ -57,9 +103,11 @@ namespace Lynox.SEF.CPU
                 }
                 else
                 {
-                    string[] args = item.Split(' ', ',');
+                    string[] args = item.Split(splits, StringSplitOptions.RemoveEmptyEntries);
 
-                    switch (args[0])
+                    //Console.WriteLine(args[0].ToUpper());
+
+                    switch (args[0].ToUpper())
                     {
                         case "ADD":
 
@@ -153,6 +201,90 @@ namespace Lynox.SEF.CPU
                         case "CLI":
                             break;
                         case "CMC":
+                            break;
+                        case "CMP":
+
+                            decimal cmpto1 = 0,cmpto2 = 0;
+
+                            switch (args[2])
+                            {
+                                case "AX":
+                                    cmpto1 = Regs.AX;
+                                    break;
+                                case "CX":
+                                    cmpto1 = Regs.CX;
+                                    break;
+                                case "BX":
+                                    cmpto1 = Regs.BX;
+                                    break;
+                                case "SP":
+                                    cmpto1 = Regs.SP;
+                                    break;
+                                case "BP":
+                                    cmpto1 = Regs.BP;
+                                    break;
+                                case "SI":
+                                    cmpto1 = Regs.SI;
+                                    break;
+                                case "DI":
+                                    cmpto1 = Regs.DI;
+                                    break;
+                                default:
+
+                                    if (decimal.TryParse(args[2], out cmpto1))
+                                    { }
+                                    else
+                                    {
+                                        Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                    }
+
+                                    break;
+                            }
+
+                            switch (args[2])
+                            {
+                                case "AX":
+                                    cmpto2 = Regs.AX;
+                                    break;
+                                case "CX":
+                                    cmpto2 = Regs.CX;
+                                    break;
+                                case "BX":
+                                    cmpto2 = Regs.BX;
+                                    break;
+                                case "SP":
+                                    cmpto2 = Regs.SP;
+                                    break;
+                                case "BP":
+                                    cmpto2 = Regs.BP;
+                                    break;
+                                case "SI":
+                                    cmpto2 = Regs.SI;
+                                    break;
+                                case "DI":
+                                    cmpto2 = Regs.DI;
+                                    break;
+                                default:
+
+                                    if (decimal.TryParse(args[2], out cmpto2))
+                                    { }
+                                    else
+                                    {
+                                        Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                    }
+
+                                    break;
+                            }
+
+                            if (cmpto1 == cmpto2)
+                            {
+                                SEF_CPU.Assemble(funcKeys[args[3]]);
+                            }
+                            else
+                            {
+                                SEF_CPU.Assemble(funcKeys[args[4]]);
+                            }
+
                             break;
                         case "CMPSB":
                             break;
@@ -535,6 +667,18 @@ namespace Lynox.SEF.CPU
                             }
                             IsFuction = false;
                             Cfunction = "";
+                            break;
+                        case "RECT":
+                            if (graphics.isgui)
+                                graphics.canvas.DrawFilledRectangle(Color.FromName(args[5]), (int)SEF_UTILS.ParseArgs(args[1]), (int)SEF_UTILS.ParseArgs(args[2]), (int)SEF_UTILS.ParseArgs(args[3]), (int)SEF_UTILS.ParseArgs(args[4]));
+                            break;
+                        case "INITGUI":
+
+                            if (graphics.isgui == false)
+                            {
+                                graphics.entry();
+                            }
+
                             break;
                         default:
                             break;

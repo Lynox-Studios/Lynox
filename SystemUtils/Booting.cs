@@ -10,6 +10,7 @@ namespace Lynox.SystemUtils
 {
     public static class Booting
     {
+
         public static void Boot()
         {
             VFSManager.RegisterVFS(SystemData.fs);
@@ -21,6 +22,13 @@ namespace Lynox.SystemUtils
             Console.Clear();
             diagPrint("OK", "Booter");
             diagPrint("OK", "LynoxSystem");
+            SystemData.init();
+
+            diagPrint("OK", "System service(s) starting..");
+            foreach (var serv in SystemData.procMgr.ServiceNames)
+            {
+                serv.ServiceStart();
+            }
         }
 
         public static void diagPrint(string status,  string proc)
@@ -44,5 +52,18 @@ namespace Lynox.SystemUtils
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" " + proc);
         }
-    }
+
+        public static ProgressBar Progressbar(int percentage,int max)
+        {
+
+            var a = new ProgressBar() { max = max, percentage = percentage};
+
+            a.Init(Console.GetCursorPosition().Left, Console.GetCursorPosition().Top);
+
+            return a;
+
+        }
+
+    } 
+
 }

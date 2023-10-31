@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using TestDistro.ConsoleMode;
+using TestDistro.GraphicMode;
 using Sys = Cosmos.System;
 
 namespace Lynox
@@ -15,6 +17,17 @@ namespace Lynox
 
         protected override void Run()
         {
+
+            if (!File.Exists("0:\\system\\bin_enabled.conf"))
+            {
+                Booting.diagPrint("FAILED", "Your system has invalid/broken binaries, you will be sent to mode config recovery.");
+                SystemUtils.FirstTimeSetup.FreshSetup();
+            }
+            else if (Directory.GetFiles("0:\\bin").Length != 1)
+            {
+                Booting.diagPrint("FAILED", "Your system has invalid/broken binaries, you will be sent to mode config recovery.");
+                SystemUtils.FirstTimeSetup.FreshSetup();
+            }
             if (!File.Exists("0:\\system\\system_mode.conf"))
             {
                 Booting.diagPrint("FAILED", "Your system has invalid/broken configs, you will need to select a default boot mode before booting.");
@@ -75,10 +88,10 @@ namespace Lynox
             
             switch (File.ReadAllText("0:\\system\\system_mode.conf")) {
                 case "CONSOLE":
-                    ConsoleMode.console.entry();
+                    TestDistro.ConsoleMode.console.entry();
                     break;
                 case "GRAPHICAL":
-                    GraphicMode.graphics.entry();
+                    TestDistro.GraphicMode.graphics.entry();
                     break;
                 default:
                     Booting.diagPrint("FAILED", "Your system has invalid/broken configs, you will be sent to mode config recovery.");

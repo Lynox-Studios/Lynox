@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lynox;
 
-namespace Lynox.ConsoleMode
+namespace TestDistro.ConsoleMode
 {
     internal class loginmgr
     {
@@ -21,7 +22,6 @@ namespace Lynox.ConsoleMode
             Console.Write(SystemData.OSName);
             Console.ResetColor();
             Console.WriteLine("!");
-
             username:
             Console.Write("Username: ");
             Console.ForegroundColor = ConsoleColor.Green;

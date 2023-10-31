@@ -1,86 +1,46 @@
-﻿using Lynox.ConsoleMode.ConsoleUtils;
-using Lynox.SEF.CPU;
+﻿using Lynox.SEF.CPU;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Cosmos.HAL.BlockDevice.ATA_PIO;
+using Lynox.SystemUtils;
+using TestDistro.ConsoleMode.ConsoleUtils;
 
-namespace Lynox.ConsoleMode
+namespace Lynox.SystemUtils
 {
-    internal class shell
+    internal static class SystemCommands
     {
-        public static string currentDir = "0:\\home\\";
-        public static string shownCurrentDir = "~";
-
-        public static void currentDirUpdater(string user)
+        public static string[] commandNames =
         {
-            if (currentDir.StartsWith("0:\\home\\" + user))
-            {
-                shownCurrentDir = currentDir.Replace("0:\\home\\" + user, "~");
-            }
-            else
-            {
-                shownCurrentDir = currentDir;
-            }
-        }
+            "?", "h", "help",
+            "ls", "lyno", "cd", "rmdir", "mkdir", "rm", "touch", "cat",
+            "cl", "clear",
+            "pb", "gui", "sef"
+        };
 
-        public static void run(string user)
+        public static void HandleSystemCommandsInConsoleMode(string[] paramArray, string currentDir, string command)
         {
-            currentDir += user + "\\";
-            while (true)
-            {
-                currentDirUpdater(user);
-                Console.Write("[" + user + "@Lynox " + shownCurrentDir + "]$ ");
-                var command = "";
-
-                var prevKeyChar = '0';
-                var key = Console.ReadKey();
-                while (key.Key != ConsoleKey.Enter)
-                {
-                    if (key.Key == ConsoleKey.Backspace)
-                    {
-                        if (command.Length > 0)
-                        {
-                            Console.CursorLeft--;
-                            Console.Write(' ');
-                            Console.CursorLeft--;
-                            command = command.Remove(command.Length - 1, 1);
-                        }
-                        else
-                        {
-                            Console.CursorLeft++;
-                            Console.CursorLeft--;
-                        }
-                    }
-                    else if (key.Key == ConsoleKey.Tab)
-                    {
-                        //change soon
-                        command += "    ";
-                        Console.Write("    ");
-                    }
-                    else
-                    {
-                        command += key.KeyChar;
-                    }
-                    prevKeyChar = key.KeyChar;
-                    key = Console.ReadKey();
-                }
-                Console.Write('\n');
-                exec(command);
-            }
-        }
-
-        public static void exec(string command)
-        {
-            var paramArray = command.Split(' ');
-            if (command == null || command == "" || command == " " || paramArray.Length <= 0)
-                return;
-
             switch (paramArray[0].ToLower())
             {
+                case "?":
+                case "h":
+                case "help":
+                    Console.WriteLine("PAGE 1/1 -----------------------------------------------------\n");
+                    Console.WriteLine("help/h/? - shows this menu");
+                    Console.WriteLine("ls - shows every file/folder in the current/selected directory");
+                    Console.WriteLine("lyno - a simple text editor");
+                    Console.WriteLine("cd - goes to a specified directory");
+                    Console.WriteLine("mkdir - creates a directory");
+                    Console.WriteLine("rmdir - removes a directory");
+                    Console.WriteLine("rm - deletes a file");
+                    Console.WriteLine("touch - creates a file");
+                    Console.WriteLine("cat - reads the content of a file");
+                    Console.WriteLine("sef - assembles assembly code");
+                    Console.WriteLine("\n--------------------------------------------------------------");
+
+                    break;
                 case "ls":
                     Console.ForegroundColor = ConsoleColor.Green;
                     foreach (var dirs in Directory.GetDirectories(currentDir))
@@ -129,17 +89,25 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 case "cd":
-                    if (command.StartsWith("cd ..."))
+                    if (paramArray.Length > 1)
                     {
-                        currentDir = "0:\\";
-                    }
-                    if (Directory.Exists(command.Replace("cd ", currentDir)))
-                    {
-                        currentDir += command.Replace("cd ", "") + "\\";
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid Directory!");
+                        if (paramArray[1] == "...")
+                        {
+                            currentDir = "0:\\";
+                        }
+                        else if (paramArray[1] == ".." && currentDir.Split('\\').Length > 1)
+                        {
+                            currentDir = currentDir.TrimEnd(currentDir.Split('\\')[currentDir.Length - 1].ToCharArray());
+                        }
+
+                        if (Directory.Exists(command.Replace("cd ", currentDir)))
+                        {
+                            currentDir += command.Replace("cd ", "") + "\\";
+                        }
+                        else
+                        {
+                            Console.WriteLine("-lash: " + command + ": No such file or directory");
+                        }
                     }
                     break;
                 case "rmdir":
@@ -193,10 +161,18 @@ namespace Lynox.ConsoleMode
                 case "clear":
                     Console.Clear();
                     break;
+                case "pb":
+                    var pb = Booting.Progressbar(5, 10);
+                    break;
                 case "cat":
                     if (!(paramArray.Length > 1))
                         break;
+                    if (!File.Exists(currentDir + paramArray[1]))
+                        break;
                     Console.WriteLine(File.ReadAllText(currentDir + paramArray[1]));
+                    break;
+                case "gui":
+                    TestDistro.GraphicMode.graphics.entry();
                     break;
                 case "sef":
 
@@ -213,7 +189,19 @@ namespace Lynox.ConsoleMode
                         else if (paramArray[1].ToLower() == "assemblef")
                         {
 
-                            SEF_CPU.Assemble(currentDir+paramArray[2], true);
+                            SEF_CPU.Assemble(currentDir + paramArray[2], true);
+
+                        }
+                        else if (paramArray[1].ToLower() == "mexe")
+                        {
+
+                            SEF_CPU.MakeExecutable(currentDir + paramArray[2], currentDir + paramArray[3]);
+
+                        }
+                        else if (paramArray[1].ToLower() == "run")
+                        {
+
+                            SEF_CPU.Execute(currentDir + paramArray[2]);
 
                         }
                         else if (paramArray[1].ToLower() == "showregs")
@@ -235,13 +223,24 @@ namespace Lynox.ConsoleMode
                     }
                     break;
                 default:
+
+                    if (File.Exists(currentDir + paramArray[0].Replace("./", "")) && paramArray[0].StartsWith("./"))
+                    {
+                        SEF_CPU.Execute(currentDir + paramArray[0].Replace("./", ""));
+                        break;
+                    }
+
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("lash");
                     Console.ResetColor();
                     Console.WriteLine(": Unrecognized command/file.");
                     break;
             }
-            Console.ResetColor();
+        }
+        public static bool IsSystemCommand(string command)
+        {
+            foreach (var cmd in commandNames) { if (cmd.ToLower() == command.ToLower()) { return true; } }
+            return false;
         }
     }
 }

@@ -10,6 +10,33 @@ namespace Lynox.SEF.UTILS
     public class SEF_UTILS
     {
 
+        public static string DecimalToString(decimal input)
+        {
+            StringBuilder sb = new StringBuilder();
+            string inputStr = input.ToString();
+
+            for (int i = 0; i < inputStr.Length; i += 2)
+            {
+                string numberStr = inputStr.Substring(i, 2);
+                int number = int.Parse(numberStr);
+                char c = (char)number;
+                sb.Append(c);
+            }
+
+            return sb.ToString();
+        }
+
+        public static long StringToDecimal(string input)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (char c in input)
+            {
+                sb.Append((int)c);
+            }
+
+            return long.Parse(sb.ToString());
+        }
         public static string Encrypt(string textToEncrypt, int shift = 3)
         {
             StringBuilder sb = new StringBuilder();

@@ -206,7 +206,7 @@ namespace Lynox.SEF.CPU
 
                             decimal cmpto1 = 0,cmpto2 = 0;
 
-                            switch (args[2])
+                            switch (args[1])
                             {
                                 case "AX":
                                     cmpto1 = Regs.AX;
@@ -231,11 +231,11 @@ namespace Lynox.SEF.CPU
                                     break;
                                 default:
 
-                                    if (decimal.TryParse(args[2], out cmpto1))
+                                    if (decimal.TryParse(args[1], out cmpto1))
                                     { }
                                     else
                                     {
-                                        Console.WriteLine($"{args[2].ToUpper()} is not a recognized register");
+                                        Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
                                     }
 
                                     break;
@@ -406,6 +406,57 @@ namespace Lynox.SEF.CPU
                         case "LOOPx":
                             break;
                         case "MOV":
+                            decimal str = 0;
+
+                            string appendedstr = "";
+                            for (int i = 0; i < args.Length; i++)
+                            {
+
+                                if (i > 2)
+                                {
+                                    appendedstr += args[i] + " ";
+                                }
+
+                            }
+
+                            str = SEF_UTILS.StringToDecimal(appendedstr);
+
+                            Console.WriteLine(str);
+
+                            switch (args[1])
+                            {
+                                case "AX":
+                                    Regs.AX =str;
+                                    break;
+                                case "CX":
+                                    Regs.CX = str ;
+                                    break;
+                                case "BX":
+                                    Regs.BX = str;
+                                    break;
+                                case "SP":
+                                    Regs.SP=str;
+                                    break;
+                                case "BP":
+                                    Regs.BP = str;
+                                    break;
+                                case "SI":
+                                    Regs.SI = str;
+                                    break;
+                                case "DI":
+                                    Regs.DI = str;
+                                    break;
+                                default:
+
+                                    if (decimal.TryParse(args[1], out str))
+                                    { }
+                                    else
+                                    {
+                                        Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                    }
+
+                                    break;
+                            }
                             break;
                         case "MOVSB":
                             break;
@@ -618,13 +669,22 @@ namespace Lynox.SEF.CPU
                             break;
                         case "PRI":
 
+                            decimal dts;
                             string pr = "";
-
-                            for (int i = 0; i < args.Length; i++)
+                            if (decimal.TryParse(args[1], out dts))
                             {
-                                if (i > 0)
+
+                                pr = SEF_UTILS.DecimalToString(dts);
+
+                            }
+                            else
+                            {
+                                for (int i = 0; i < args.Length; i++)
                                 {
-                                    pr += $" {args[i]}";
+                                    if (i > 0)
+                                    {
+                                        pr += $" {args[i]}";
+                                    }
                                 }
                             }
 
@@ -632,13 +692,22 @@ namespace Lynox.SEF.CPU
                             break;
                         case "PRL":
 
+                            decimal dtsl;
                             string prl = "";
-
-                            for (int i = 0; i < args.Length; i++)
+                            if (decimal.TryParse(args[1], out dtsl))
                             {
-                                if (i > 0)
+
+                                prl = SEF_UTILS.DecimalToString(dtsl);
+
+                            }
+                            else
+                            {
+                                for (int i = 0; i < args.Length; i++)
                                 {
-                                    prl += $" {args[i]}";
+                                    if (i > 0)
+                                    {
+                                        prl += $" {args[i]}";
+                                    }
                                 }
                             }
 

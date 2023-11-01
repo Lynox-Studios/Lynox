@@ -23,6 +23,7 @@ namespace Lynox.SEF.CPU
         {
 
             public static decimal AX, CX,BX,SP,BP,SI,DI;
+            public static string AXS, CXS,BXS,SPS,BPS,SIS,DIS;
 
         }
 
@@ -406,57 +407,84 @@ namespace Lynox.SEF.CPU
                         case "LOOPx":
                             break;
                         case "MOV":
-                            decimal str = 0;
-
-                            string appendedstr = "";
-                            for (int i = 0; i < args.Length; i++)
+                            string str = "";
+                            long num = 0;
+                            if (long.TryParse(args[2],out num))
                             {
 
-                                if (i > 2)
+                                switch (args[1])
                                 {
-                                    appendedstr += args[i] + " ";
+                                    case "AX":
+                                        Regs.AX = num;
+                                        break;
+                                    case "CX":
+                                        Regs.CX = num;
+                                        break;
+                                    case "BX":
+                                        Regs.BX = num;
+                                        break;
+                                    case "SP":
+                                        Regs.SP = num;
+                                        break;
+                                    case "BP":
+                                        Regs.BP = num;
+                                        break;
+                                    case "SI":
+                                        Regs.SI = num;
+                                        break;
+                                    case "DI":
+                                        Regs.DI = num;
+                                        break;
+                                    default:
+                                        Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                        break;
+                                }
+
+                            }
+                            else
+                            {
+                                for (int i = 0; i < args.Length; i++)
+                                {
+
+                                    if (i > 2)
+                                    {
+                                        str += args[i] + " ";
+                                    }
+
+                                }
+
+                                Console.WriteLine(str);
+
+                                switch (args[1])
+                                {
+                                    case "AX":
+                                        Regs.AXS = str;
+                                        break;
+                                    case "CX":
+                                        Regs.CXS = str;
+                                        break;
+                                    case "BX":
+                                        Regs.BXS = str;
+                                        break;
+                                    case "SP":
+                                        Regs.SPS = str;
+                                        break;
+                                    case "BP":
+                                        Regs.BPS = str;
+                                        break;
+                                    case "SI":
+                                        Regs.SIS = str;
+                                        break;
+                                    case "DI":
+                                        Regs.DIS = str;
+                                        break;
+                                    default:
+                                        Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
+                                        break;
                                 }
 
                             }
 
-                            str = SEF_UTILS.StringToDecimal(appendedstr);
-
-                            Console.WriteLine(str);
-
-                            switch (args[1])
-                            {
-                                case "AX":
-                                    Regs.AX =str;
-                                    break;
-                                case "CX":
-                                    Regs.CX = str ;
-                                    break;
-                                case "BX":
-                                    Regs.BX = str;
-                                    break;
-                                case "SP":
-                                    Regs.SP=str;
-                                    break;
-                                case "BP":
-                                    Regs.BP = str;
-                                    break;
-                                case "SI":
-                                    Regs.SI = str;
-                                    break;
-                                case "DI":
-                                    Regs.DI = str;
-                                    break;
-                                default:
-
-                                    if (decimal.TryParse(args[1], out str))
-                                    { }
-                                    else
-                                    {
-                                        Console.WriteLine($"{args[1].ToUpper()} is not a recognized register");
-                                    }
-
-                                    break;
-                            }
                             break;
                         case "MOVSB":
                             break;

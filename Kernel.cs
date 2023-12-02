@@ -1,4 +1,5 @@
 ﻿using Cosmos.HAL;
+using Lynox.net;
 using Lynox.SystemUtils;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,10 @@ namespace Lynox
 {
     public class Kernel : Sys.Kernel
     {
-        
+        private int startPosX;
+        private int startPosY;
+        private bool optionConsole = true;
+
         protected override void BeforeRun() => Booting.Boot();
 
         protected override void Run()

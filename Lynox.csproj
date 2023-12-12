@@ -30,6 +30,7 @@
         <PackageReference Include="Cosmos.HAL2" Version="0-*" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="CosmosHttp" Version="1.0.2" />
     </ItemGroup>
 
     <ItemGroup>

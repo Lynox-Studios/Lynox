@@ -6,9 +6,11 @@ using Cosmos.System.Network;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
 using Cosmos.System.Network.Config;
 using Cosmos.System.Network.IPv4.UDP.DNS;
-using Cosmos.System.Network.IPv4.TCP;
 using Cosmos.System.Network.IPv4;
 using Cosmos.HAL;
+using System.IO;
+using System.Security.Policy;
+using CosmosHttp.Client;
 
 namespace Lynox.net
 {
@@ -16,6 +18,10 @@ namespace Lynox.net
     {
 
         DnsClient dnsClient;
+
+
+
+
 
         public NETClient()
         {
@@ -25,38 +31,47 @@ namespace Lynox.net
                 /** Send a DHCP Discover packet **/
                 //This will automatically set the IP config after DHCP response
                 xClient.SendDiscoverPacket();
-            }
-
-            try
-            {
-
                 dnsClient = new DnsClient();
 
                 dnsClient.Connect(DNSConfig.DNSNameservers[0]);
 
+
+
+
+
             }
-            catch (Exception ex)
+            else
             {
-
-                Console.WriteLine(ex.Message);
+                start = 0;
             }
 
-        }
-
-        public void Connect(string site, int port)
-        {
+            int end = url.IndexOf("/", start);
+            if (end == -1)
+            {
+                end = url.Length;
+            }
 
             dnsClient.SendAsk(site);
 
             Address address = dnsClient.Receive();
 
+            return HttpGET(Data);
+            return HttpGET(Data);
+            return HttpGET(Data);
+            return HttpGET(Data);
 
-        }
-
-        public void Close()
-        {
-
+                return httpresponse;
+            }
+            catch (Exception ex)
             dnsClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
 
         }
 

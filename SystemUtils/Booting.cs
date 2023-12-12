@@ -1,4 +1,5 @@
 ﻿using Cosmos.System.FileSystem.VFS;
+using Lynox._TESTING_DISTRO_.ConsoleMode;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -67,6 +68,15 @@ namespace Lynox.SystemUtils
         {
             VFSManager.RegisterVFS(SystemData.fs);
             diagPrint("OK", "Filesystem Initialization");
+
+            if (!Directory.Exists(@"0:\tmp"))
+            {
+                Directory.CreateDirectory(@"0:\tmp");
+
+            }
+
+            pkg.Download("test","1");
+
             if (!File.Exists("0:\\sys_config.conf"))
             {
                 FirstTimeSetup.FreshSetup();

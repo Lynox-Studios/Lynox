@@ -6,17 +6,16 @@ using Cosmos.System.Network;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
 using Cosmos.System.Network.Config;
 using Cosmos.System.Network.IPv4.UDP.DNS;
-using Cosmos.System.Network.IPv4.TCP;
 using Cosmos.System.Network.IPv4;
 using Cosmos.HAL;
+using System.IO;
+using System.Security.Policy;
+using CosmosHttp.Client;
 
 namespace Lynox.net
 {
     public class NETClient
     {
-
-        DnsClient dnsClient;
-        TcpClient tcpClient;
 
         public NETClient()
         {
@@ -28,73 +27,80 @@ namespace Lynox.net
                 xClient.SendDiscoverPacket();
             }
 
-            try
-            {
-
-                dnsClient = new DnsClient();
-                tcpClient = new TcpClient();
-
-                dnsClient.Connect(DNSConfig.DNSNameservers[0]);
-
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-
         }
 
-        public void Connect(string site, int port)
+        private string ExtractDomainNameFromUrl(string url)
         {
-
-            dnsClient.SendAsk(site);
-
-            Address address = dnsClient.Receive();
-
-            tcpClient.Connect(address, port);
-
-        }
-
-        public string HttpGET(string Data)
-        {
-
-            tcpClient.Send(Encoding.ASCII.GetBytes(Data));
-
-            var ep = new EndPoint(Address.Zero, 0);
-            var data = tcpClient.Receive(ref ep);
-
-            string httpresponse = Encoding.ASCII.GetString(data);
-
-
-            string[] responseParts = httpresponse.Split(new[] { "\r\n\r\n" }, 2, StringSplitOptions.None);
-
-            if (responseParts.Length == 2)
+            int start;
+            if (url.Contains("://"))
             {
-                string headers = responseParts[0];
-                string content = responseParts[1];
-                return content;
+                start = url.IndexOf("://") + 3;
             }
             else
             {
-                return "";
+                start = 0;
             }
 
+            int end = url.IndexOf("/", start);
+            if (end == -1)
+            {
+                end = url.Length;
+            }
+
+            return url[start..end];
         }
 
-        public string ConnectAndGet(string site, int port, string Data)
+
+        private string ExtractPathFromUrl(string url)
         {
+            int start;
+            if (url.Contains("://"))
+            {
+                start = url.IndexOf("://") + 3;
+            }
+            else
+            {
+                start = 0;
+            }
 
-            Connect(site, port);
-            return HttpGET(Data);
-
+            int indexOfSlash = url.IndexOf("/", start);
+            if (indexOfSlash != -1)
+            {
+                return url.Substring(indexOfSlash);
+            }
+            else
+            {
+                return "/";
+            }
         }
 
-        public void Close()
+        public string GET(string site, int port)
         {
 
-            dnsClient.Close();
-            tcpClient.Close();
+            try
+            {
+                var dnsClient = new DnsClient();
+
+                dnsClient.Connect(DNSConfig.DNSNameservers[0]);
+                dnsClient.SendAsk(ExtractDomainNameFromUrl(site));
+                Address address = dnsClient.Receive();
+                dnsClient.Close();
+
+                HttpRequest request = new();
+                request.IP = address.ToString();
+                request.Path = ExtractPathFromUrl(site);
+                request.Method = "GET";
+                request.Send();
+
+                string httpresponse = request.Response.Content;
+
+                return httpresponse;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
 
         }
 

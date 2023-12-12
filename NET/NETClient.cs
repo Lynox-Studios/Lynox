@@ -17,6 +17,12 @@ namespace Lynox.net
     public class NETClient
     {
 
+        DnsClient dnsClient;
+
+
+
+
+
         public NETClient()
         {
 
@@ -25,16 +31,14 @@ namespace Lynox.net
                 /** Send a DHCP Discover packet **/
                 //This will automatically set the IP config after DHCP response
                 xClient.SendDiscoverPacket();
-            }
+                dnsClient = new DnsClient();
 
-        }
+                dnsClient.Connect(DNSConfig.DNSNameservers[0]);
 
-        private string ExtractDomainNameFromUrl(string url)
-        {
-            int start;
-            if (url.Contains("://"))
-            {
-                start = url.IndexOf("://") + 3;
+
+
+
+
             }
             else
             {
@@ -47,60 +51,27 @@ namespace Lynox.net
                 end = url.Length;
             }
 
-            return url[start..end];
-        }
+            dnsClient.SendAsk(site);
 
+            Address address = dnsClient.Receive();
 
-        private string ExtractPathFromUrl(string url)
-        {
-            int start;
-            if (url.Contains("://"))
-            {
-                start = url.IndexOf("://") + 3;
-            }
-            else
-            {
-                start = 0;
-            }
-
-            int indexOfSlash = url.IndexOf("/", start);
-            if (indexOfSlash != -1)
-            {
-                return url.Substring(indexOfSlash);
-            }
-            else
-            {
-                return "/";
-            }
-        }
-
-        public string GET(string site, int port)
-        {
-
-            try
-            {
-                var dnsClient = new DnsClient();
-
-                dnsClient.Connect(DNSConfig.DNSNameservers[0]);
-                dnsClient.SendAsk(ExtractDomainNameFromUrl(site));
-                Address address = dnsClient.Receive();
-                dnsClient.Close();
-
-                HttpRequest request = new();
-                request.IP = address.ToString();
-                request.Path = ExtractPathFromUrl(site);
-                request.Method = "GET";
-                request.Send();
-
-                string httpresponse = request.Response.Content;
+            return HttpGET(Data);
+            return HttpGET(Data);
+            return HttpGET(Data);
+            return HttpGET(Data);
 
                 return httpresponse;
             }
             catch (Exception ex)
-            {
-                return ex.Message;
-            }
-
+            dnsClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
+            dnsClient.Close();
+            tcpClient.Close();
 
         }
 

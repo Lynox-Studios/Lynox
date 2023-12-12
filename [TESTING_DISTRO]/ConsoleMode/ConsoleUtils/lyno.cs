@@ -4,6 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Channels;
 using Lynox;
+using Lynox.Additions;
 
 namespace TestDistro.ConsoleMode.ConsoleUtils
 {
@@ -150,14 +151,14 @@ namespace TestDistro.ConsoleMode.ConsoleUtils
                     saved = true;
                     if (fileName != "Untitled")
                     {
-                        File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
+                        File.WriteAllText(lash.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
                     }
                     else
                     {
                         Console.Clear();
                         Console.Write("Enter filename (with extension): ");
                         fileName = Console.ReadLine();
-                        File.WriteAllText(shell.currentDir + fileName, buffer.Remove(buffer.Length - 1, 1));
+                        File.WriteAllText(lash.currentDir + fileName, buffer.Remove(buffer.Length - 1, 1));
                         goto goBackToLoop;
                     }
                 }
@@ -188,13 +189,13 @@ namespace TestDistro.ConsoleMode.ConsoleUtils
                             {
                                 if (fileName != "Untitled")
                                 {
-                                    File.WriteAllText(shell.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
+                                    File.WriteAllText(lash.currentDir + (fileName.TrimEnd('*')), buffer.Remove(buffer.Length - 1, 1));
                                 }
                                 else
                                 {
                                     Console.Write("Enter filename (with extension): ");
                                     var name = Console.ReadLine();
-                                    File.WriteAllText(shell.currentDir + name, buffer.Remove(buffer.Length - 1, 1));
+                                    File.WriteAllText(lash.currentDir + name, buffer.Remove(buffer.Length - 1, 1));
                                 }
                                 return;
                             }

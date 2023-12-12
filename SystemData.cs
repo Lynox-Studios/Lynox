@@ -13,9 +13,11 @@ namespace Lynox
         public const string OSName = "Lynox";              // OS Name
         public const string OSVer  = "0.1.0.0";                // OS Version
         public const string OSAcNa = OSName + " " + OSVer; // OS Access Name
+        public const string CurrentDrive = "0:\\";
 
         public static CosmosVFS fs = new();
         public static ProcessManager procMgr = new();
+        public static string currentUser = "root";
 
         public static void init() {
             procMgr.AddProc(OSName);

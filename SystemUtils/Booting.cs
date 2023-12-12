@@ -11,6 +11,58 @@ namespace Lynox.SystemUtils
     public static class Booting
     {
 
+        public static void Login()
+        {
+            var attempts = 0;
+            string[] users = File.ReadAllText("0:\\system\\user.list").Split('\n');
+            string password = "";
+
+            Booting.diagPrint("OK", "Launched console login manager");
+            Console.Write("Welcome to ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(SystemData.OSName);
+            Console.ResetColor();
+            Console.WriteLine("!");
+        username:
+            Console.Write("Username: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            var name = Console.ReadLine();
+            Console.ResetColor();
+            foreach (var user in users) {
+                if (name != user)
+                {
+                    Console.WriteLine("Invalid username!");
+                    goto username;
+                }
+            }
+            password = File.ReadAllText("0:\\system\\" + name + ".password");
+
+        password:
+            Console.Write("Password: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            var passwd = Console.ReadLine();
+            Console.ResetColor();
+            if (passwd != password)
+            {
+                Console.CursorTop--;
+                Console.CursorLeft += ("Password: ").Length + passwd.Length;
+                Console.CursorLeft -= passwd.Length;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(new String('*', passwd.Length));
+                Console.ResetColor();
+                Console.WriteLine("Invalid password!");
+                goto password;
+            }
+
+            Console.CursorTop--;
+            Console.CursorLeft += ("Password: ").Length + passwd.Length;
+            Console.CursorLeft -= passwd.Length;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(new String('*', passwd.Length));
+            Console.ResetColor();
+            SystemData.currentUser = name;
+        }
+
         public static void Boot()
         {
             VFSManager.RegisterVFS(SystemData.fs);
@@ -29,6 +81,8 @@ namespace Lynox.SystemUtils
             {
                 serv.ServiceStart();
             }
+
+            Login();
         }
 
         public static void diagPrint(string status,  string proc)

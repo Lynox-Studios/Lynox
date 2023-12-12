@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lynox;
+using Lynox.Additions;
 
 namespace TestDistro.ConsoleMode
 {
@@ -13,9 +14,7 @@ namespace TestDistro.ConsoleMode
         public static void entry()
         {
             Booting.diagPrint("OK", "Entered console mode!");
-            var user = loginmgr.login();
-
-            shell.run(user);
+            lash.runLash();
         }
     }
 }

@@ -52,9 +52,12 @@ namespace Lynox.SystemUtils
             }
             try
             {
-                File.WriteAllText("0:\\system\\user.conf", username);
+                Directory.CreateDirectory("0:\\home\\" + username);
+                Directory.CreateDirectory("0:\\system\\");
+                File.WriteAllText("0:\\system\\user.list", username);
                 Booting.diagPrint("OK", "Generating user configs. [1/2]");
-                File.WriteAllText("0:\\system\\passwd.conf", password);
+                Directory.CreateDirectory("0:\\system\\passwords\\");
+                File.WriteAllText("0:\\system\\passwords\\" + username + ".password", password);
                 Booting.diagPrint("OK", "Generating user configs. [2/2]");
             }
             catch (Exception)
@@ -103,6 +106,15 @@ namespace Lynox.SystemUtils
             catch (Exception)
             {
                 Booting.diagPrint("FAILED", "System cannot generate bin directories. [WARNING: This will break the system.]");
+            }
+
+            try
+            {
+                File.Create("0:\\system\\marked_executable.list");
+            }
+            catch (Exception)
+            {
+                Booting.diagPrint("FAILED", "System cannot generate marked executable list. This could potentially prevent executables on this system.");
             }
             cs.Power.Reboot();
         }

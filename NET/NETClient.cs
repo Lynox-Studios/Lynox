@@ -16,7 +16,6 @@ namespace Lynox.net
     {
 
         DnsClient dnsClient;
-        TcpClient tcpClient;
 
         public NETClient()
         {
@@ -32,7 +31,6 @@ namespace Lynox.net
             {
 
                 dnsClient = new DnsClient();
-                tcpClient = new TcpClient();
 
                 dnsClient.Connect(DNSConfig.DNSNameservers[0]);
 
@@ -52,41 +50,6 @@ namespace Lynox.net
 
             Address address = dnsClient.Receive();
 
-            tcpClient.Connect(address, port);
-
-        }
-
-        public string HttpGET(string Data)
-        {
-
-            tcpClient.Send(Encoding.ASCII.GetBytes(Data));
-
-            var ep = new EndPoint(Address.Zero, 0);
-            var data = tcpClient.Receive(ref ep);
-
-            string httpresponse = Encoding.ASCII.GetString(data);
-
-
-            string[] responseParts = httpresponse.Split(new[] { "\r\n\r\n" }, 2, StringSplitOptions.None);
-
-            if (responseParts.Length == 2)
-            {
-                string headers = responseParts[0];
-                string content = responseParts[1];
-                return content;
-            }
-            else
-            {
-                return "";
-            }
-
-        }
-
-        public string ConnectAndGet(string site, int port, string Data)
-        {
-
-            Connect(site, port);
-            return HttpGET(Data);
 
         }
 
@@ -94,7 +57,6 @@ namespace Lynox.net
         {
 
             dnsClient.Close();
-            tcpClient.Close();
 
         }
 

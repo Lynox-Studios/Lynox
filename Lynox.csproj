@@ -26,11 +26,13 @@
     <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Common" Version="0-*" />
-        <PackageReference Include="Cosmos.Core" Version="0-*" />
+        <PackageReference Include="Cosmos.Core" Version="0.1.0-localbuild20231212093115" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.HAL2" Version="0-*" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="CosmosHttp" Version="1.0.2" />
+        <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.37.0" />
     </ItemGroup>
 
     <ItemGroup>

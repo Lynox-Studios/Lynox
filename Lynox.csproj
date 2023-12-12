@@ -32,7 +32,6 @@
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="CosmosHttp" Version="1.0.2" />
-        <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.37.0" />
     </ItemGroup>
 
     <ItemGroup>

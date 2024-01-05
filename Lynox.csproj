@@ -33,8 +33,4 @@
         <PackageReference Include="CosmosHttp" Version="1.0.2" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="LynoxAPI\SystemFetcher\" />
-    </ItemGroup>
-
 </Project>

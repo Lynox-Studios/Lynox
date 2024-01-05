@@ -2,6 +2,8 @@
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using Lynox.OSDISTRIBUTION;
+using Lynox.SEF;
+using Lynox.SEF.Additional_Compilers.LUA;
 using System;
 using System.Drawing;
 using System.IO;
@@ -20,6 +22,9 @@ namespace Lynox
 
         protected override void BeforeRun()
         {
+
+            SEF.SEF.AddCompiler(new LUA());
+
             distributionManager = new DistributionManager();
             distributionManager.Start();
         }

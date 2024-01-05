@@ -9,6 +9,8 @@ namespace Lynox.OSDISTRIBUTION.BLTS
     public static class shell
     {
 
+        public static string[] command_args;
+
         public static void Start()
         {
 
@@ -20,16 +22,16 @@ namespace Lynox.OSDISTRIBUTION.BLTS
         {
 
             Console.Write("%PATH% > ");
-            var input = Console.ReadLine();
-            if (commands.Commands.ContainsKey(input))
+            var input = Console.ReadLine().Split(' ');
+            if (commands.Commands.ContainsKey(input[0]))
             {
 
-                commands.Commands[input].Invoke();
+                commands.Commands[input[0]].Invoke(input);
 
             }
             else
             {
-                Console.WriteLine(input+" is an invalid command");
+                Console.WriteLine(input[0] +" is an invalid command");
             }
 
         }

@@ -1,7 +1,9 @@
-﻿using Lynox.SEF;
+﻿using Lynox.ADDITIONS.LUA;
+using Lynox.SEF;
 using Lynox.SYSTEMMANAGER.PROCESSMANAGER;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +22,68 @@ namespace Lynox.OSDISTRIBUTION.BLTS
                 Console.WriteLine("HELP LIST");
 
             } },
-            {"sef",(args) =>
+            {"lua",(args) =>
             {
 
-                string code = "";
-                for (int i = 2; i < args.Length; i++)
+                if (File.Exists(args[1]))
                 {
-                    code += args[i]+" ";
-			    }
-                SEF.SEF.ExecuteInline(args[1],code);
+                    new LUA().Execute(File.ReadAllText(args[1]));
+                }
+                else
+                {
+                    if (File.Exists(Kernel.SYSTEM_PATH+args[1]))
+                    {
+                        new LUA().Execute(File.ReadAllText(args[1]));
+                    }
+                    else
+                    {
+                        string code = "";
+                        for (int i = 1; i < args.Length; i++)
+                        {
+                            code += args[i]+" ";
+                        }
+                        new LUA().Execute(code);
+                    }
+	            }
+
+            } },
+            {"cd",(args) =>
+            {
+
+                if (Directory.Exists(args[1]))
+                {
+                    Kernel.SYSTEM_PATH = args[1];
+                }
+                else
+                {
+                    if (Directory.Exists(Kernel.SYSTEM_PATH+args[1]))
+                    {
+                        Kernel.SYSTEM_PATH = Kernel.SYSTEM_PATH+args[1];
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid path");
+                    }
+                }
+
+            } },
+            {"mkdir",(args) =>
+            {
+
+                Directory.CreateDirectory(Kernel.SYSTEM_PATH+args[1]);
+
+            } },
+            {"ls",(args) =>
+            {
+
+                foreach (var item in Directory.GetDirectories(Kernel.SYSTEM_PATH))
+                {
+                    Console.Write(item+" ");
+	            }
+                foreach (var item in Directory.GetFiles(Kernel.SYSTEM_PATH))
+                {
+                    Console.Write(item+" ");
+                }
 
             } },
         };

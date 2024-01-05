@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lynox.SEF.Additional_Compilers;
 using UniLua;
 
-namespace Lynox.SEF.Additional_Compilers.LUA
+namespace Lynox.ADDITIONS.LUA
 {
-    public class LUA : Compiler
+    public class LUA
     {
 
         public LUA()
         {
 
-            this.COMPILER_EXTENSION = ".lua";
-            this.COMPILER_NAME = "LUA";
-
         }
 
-        public override void Execute(string code)
+        public void Execute(string code)
         {
             try
             {

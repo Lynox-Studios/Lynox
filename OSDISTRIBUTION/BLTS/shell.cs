@@ -21,7 +21,7 @@ namespace Lynox.OSDISTRIBUTION.BLTS
         public static void Update()
         {
 
-            Console.Write("%PATH% > ");
+            Console.Write(Kernel.SYSTEM_PATH+" > ");
             var input = Console.ReadLine().Split(' ');
             if (commands.Commands.ContainsKey(input[0]))
             {

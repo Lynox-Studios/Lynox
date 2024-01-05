@@ -1,9 +1,10 @@
 ﻿using Cosmos.HAL;
+using Cosmos.System.FileSystem;
+using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using Lynox.OSDISTRIBUTION;
 using Lynox.SEF;
-using Lynox.SEF.Additional_Compilers.LUA;
 using System;
 using System.Drawing;
 using System.IO;
@@ -18,12 +19,15 @@ namespace Lynox
         private int startPosX;
         private int startPosY;
         private bool optionConsole = true;
+        public static string SYSTEM_PATH = @"0:\";
         public static DistributionManager distributionManager;
+        CosmosVFS vfs;
 
         protected override void BeforeRun()
         {
 
-            SEF.SEF.AddCompiler(new LUA());
+            vfs = new CosmosVFS();
+            VFSManager.RegisterVFS(vfs);
 
             distributionManager = new DistributionManager();
             distributionManager.Start();

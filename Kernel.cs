@@ -1,8 +1,12 @@
 ﻿using Cosmos.HAL;
+using Cosmos.System.Graphics;
+using Cosmos.System.Graphics.Fonts;
 using Lynox.OSDISTRIBUTION;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Sys = Cosmos.System;
 
 namespace Lynox
@@ -24,5 +28,16 @@ namespace Lynox
         {
             distributionManager.Update();
         }
+
+        protected override void AfterRun()
+        {
+            var crash = FullScreenCanvas.GetCurrentFullScreenCanvas();
+            crash.Clear(Color.Blue);
+            crash.DrawString(info.DISTRO_NAME + " has crashed\n\n restarting in 10 seconds",PCScreenFont.Default,Color.White,10,10);
+            crash.Display();
+            Thread.Sleep(10000);
+            Cosmos.System.Power.Reboot();
+        }
+
     }
 }

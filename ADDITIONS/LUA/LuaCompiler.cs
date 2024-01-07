@@ -24,7 +24,9 @@ namespace Lynox.ADDITIONS.LUA
                 // Create a new Lua state
                 ILuaState lua = LuaAPI.NewState();
                 lua.L_OpenLibs(); // Open the Lua libraries
-                                  // Define a CSharpFunctionDelegate
+                lua.L_RequireF(APIs.LUA_LYNOXGRAPHICS.LIB_NAME
+                                  , APIs.LUA_LYNOXGRAPHICS.OpenLib
+                                  , false);
 
                 // Define a Lua script that returns a value
                 string script = code;

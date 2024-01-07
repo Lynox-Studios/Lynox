@@ -21,6 +21,7 @@
         <AllowComments>True</AllowComments>
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Player</VMWareEdition>
+        <CompileVBEMultiboot>False</CompileVBEMultiboot>
     </PropertyGroup>
 
     <ItemGroup>

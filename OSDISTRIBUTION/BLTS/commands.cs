@@ -84,6 +84,7 @@ namespace Lynox.OSDISTRIBUTION.BLTS
                 {
                     Console.Write(item+" ");
                 }
+                Console.WriteLine();
 
             } },
         };

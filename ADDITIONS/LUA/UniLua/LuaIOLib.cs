@@ -1,5 +1,8 @@
- 
+
 // TODO
+
+using System;
+using System.IO;
 
 namespace UniLua
 {
@@ -31,7 +34,7 @@ namespace UniLua
 
 		private static int IO_Close( ILuaState lua )
 		{
-			// TODO
+			
 			return 0;
 		}
 
@@ -55,7 +58,31 @@ namespace UniLua
 
 		private static int IO_Open( ILuaState lua )
 		{
-			// TODO
+
+			switch (lua.ToString(2))
+			{
+
+				case "r":
+					File.OpenRead(lua.ToString(1));
+					break;
+				case "w":
+					File.OpenWrite(lua.ToString(1));
+					break;
+                case "a":
+                    File.Open(lua.ToString(1),FileMode.Append);
+                    break;
+                case "a+":
+                    File.Open(lua.ToString(1), FileMode.Append);
+                    break;
+                case "r+":
+                    File.OpenText(lua.ToString(1));
+                    break;
+                case "w+":
+                    File.OpenWrite(lua.ToString(1));
+                    break;
+                default:
+					break;
+			}
 			return 0;
 		}
 
@@ -73,7 +100,16 @@ namespace UniLua
 
 		private static int IO_Read( ILuaState lua )
 		{
-			// TODO
+			lua.PushString("unreadable");
+
+            if (string.IsNullOrEmpty(lua.ToString(1)))
+			{
+                lua.PushString(Console.ReadLine());
+            }
+			else
+			{
+                lua.PushString(File.ReadAllText(lua.ToString(1)));
+            }
 			return 0;
 		}
 
@@ -91,7 +127,7 @@ namespace UniLua
 
 		private static int IO_Write( ILuaState lua )
 		{
-			// TODO
+
 			return 0;
 		}
 	}

@@ -4,7 +4,7 @@
 Lynox is an OS that aims to be linux but is written in C#, it follows quite a bit of a unique approach than going 1:1 linux copycat, which is that it has a different style of code, it is supporrted via the CosmosOS framework that allows OS'es to be built in C# or dotnet-based languages.
 
 ### Progress Done so far
-**[THE CODE HAS BEEN RESET RECENTLY BACK TO BASE DUE TO COMPLICATIONS]**
+**[THE CODE HAS BEEN RESET RECENTLY BACK TO BASE DUE TO COMPLICATIONS!]**
 
 ### Building
 - Windows

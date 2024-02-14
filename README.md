@@ -15,6 +15,7 @@ On windows, it's fairly simple being that you have the Cosmos DevKit (specifical
 <br>Alternatively you can use the vmrunner.ps1 file available in the source directory and run that to setup once and for all.
 <br>
 ##### Disclaimer: PLEASE NOTE TO USE RIDER WITH THE PROJECT YOU MUST HAVE POWERSHELL RESTRICTIONS DISABLED, TO DO SO, OPEN AN ELEVATED POWERSHELL PROMPT AND RUN `Set-ExecutionPolicy RemoteSigned` AND INSIDE RIDER YOU CAN PICK THE `Run` or `Run (Show Output)`.
+Alternatively you could use the PDM run options for Rider which means Policy Disabled Mode or that it will just run the script as a terminal script. Highlighted as `Run [PDM]` and `Run [PDM] (Show Output)`. This means that you cannot stop the process from Rider and it will behave just like a regular script and no different than a make file would.
 
 ##### - Linux<br>
 

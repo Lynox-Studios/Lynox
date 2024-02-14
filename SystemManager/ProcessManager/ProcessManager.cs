@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynox.SYSTEMMANAGER.PROCESSMANAGER
+namespace Lynox.SystemManager.ProcessManager
 {
     public static class ProcessManager
     {

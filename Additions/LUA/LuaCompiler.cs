@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Lynox.SEF;
 using UniLua;
 
-namespace Lynox.ADDITIONS.LUA
+namespace Lynox.Additions.LUA
 {
     public class LUA
     {

@@ -1,6 +1,6 @@
-﻿using Lynox.ADDITIONS.LUA;
+﻿using Lynox.Additions.LUA;
 using Lynox.SEF;
-using Lynox.SYSTEMMANAGER.PROCESSMANAGER;
+using Lynox.SystemManager.ProcessManager;
 using System;
 using System.Collections.Generic;
 using System.IO;

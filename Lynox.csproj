@@ -34,8 +34,4 @@
         <PackageReference Include="CosmosHttp" Version="1.0.4" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="SEF\Additional Compilers\" />
-    </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniLua;
 
-namespace Lynox.ADDITIONS.LUA.APIs
+namespace Lynox.Additions.LUA.APIs
 {
     public static class LUA_LYNOXGRAPHICS
     {

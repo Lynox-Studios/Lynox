@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynox.SYSTEMMANAGER.PROCESSMANAGER
+namespace Lynox.SystemManager.ProcessManager
 {
     public class Process
     {

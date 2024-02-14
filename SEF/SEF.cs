@@ -10,7 +10,7 @@ namespace Lynox.SEF
     public static class SEF
     {
 
-        static Dictionary<string,Compiler> compilers = new Dictionary<string,Compiler>();
+        static Dictionary<string,Compiler> compilers = new();
 
         public static void ExecuteInline(string compiler,string code)
         {

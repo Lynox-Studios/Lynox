@@ -135,8 +135,8 @@ namespace UniLua
 			LuaDebug ar = new LuaDebug();
 			if( API.GetStack( level, ar ) ) // check function at level
 			{
-				GetInfo( "Sl", ar ); // get info about it
-				if( ar.CurrentLine > 0 ) // is there info?
+				GetInfo( "Sl", ar ); // get Info about it
+				if( ar.CurrentLine > 0 ) // is there Info?
 				{
 					API.PushString( string.Format( "{0}:{1}: ", ar.ShortSrc, ar.CurrentLine ) );
 					return;

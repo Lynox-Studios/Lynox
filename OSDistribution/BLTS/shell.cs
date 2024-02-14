@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynox.OSDISTRIBUTION.BLTS
+namespace Lynox.OSDistribution.BLTS
 {
     public static class shell
     {
@@ -14,7 +14,7 @@ namespace Lynox.OSDISTRIBUTION.BLTS
         public static void Start()
         {
 
-            Console.WriteLine("Welcome to BLTS shell\n" + "you are currently using the version " + info.DISTRO_VERSION + " of the distro " + info.DISTRO_NAME);
+            Console.WriteLine("Welcome to BLTS shell\n" + "You are currently using the version " + Info.DISTRO_VERSION + " of the distro " + Info.DISTRO_NAME);
 
         }
 

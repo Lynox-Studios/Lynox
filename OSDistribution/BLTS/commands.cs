@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynox.OSDISTRIBUTION.BLTS
+namespace Lynox.OSDistribution.BLTS
 {
     public static class commands
     {

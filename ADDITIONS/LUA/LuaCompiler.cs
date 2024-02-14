@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lynox.SEF.Additional_Compilers;
+using Lynox.SEF;
 using UniLua;
 
 namespace Lynox.ADDITIONS.LUA

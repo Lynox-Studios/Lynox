@@ -13,6 +13,8 @@ Lynox is an OS that aims to be linux but is written in C#, it follows quite a bi
 
 On windows, it's fairly simple being that you have the Cosmos DevKit (specifically from here [https://github.com/PratyushKing/Cosmos] for support reasons) and you have visual studio for windows, that should be enough to build it and test it with your preferrable VM option (mostly VMWare Player).
 <br>Alternatively you can use the vmrunner.ps1 file available in the source directory and run that to setup once and for all.
+<br>
+##### Disclaimer: PLEASE NOTE TO USE RIDER WITH THE PROJECT YOU MUST HAVE POWERSHELL RESTRICTIONS DISABLED, TO DO SO, OPEN AN ELEVATED POWERSHELL PROMPT AND RUN `Set-ExecutionPolicy RemoteSigned` AND INSIDE RIDER YOU CAN PICK THE `Run` or `Run (Show Output)`.
 
 ##### - Linux<br>
 

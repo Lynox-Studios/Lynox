@@ -125,7 +125,7 @@ namespace UniLua
 			{
 				if( lua.IsString( -1 ) ) // error object is a string?
 				{
-					lua.L_Where( 1 ); // add extra info
+					lua.L_Where( 1 ); // add extra Info
 					lua.Insert( -2 );
 					lua.Concat( 2 );
 				}

@@ -1,11 +1,11 @@
-﻿using Lynox.OSDISTRIBUTION.BLTS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lynox.OSDistribution.BLTS;
 
-namespace Lynox.OSDISTRIBUTION
+namespace Lynox.OSDistribution
 {
     public class DistributionManager
     {

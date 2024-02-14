@@ -1,6 +1,6 @@
 ﻿using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
-using Lynox.OSDISTRIBUTION;
+using Lynox.OSDistribution;
 using System;
 using System.Threading;
 
@@ -44,7 +44,7 @@ namespace Lynox
 
             // var crash = FullScreenCanvas.GetCurrentFullScreenCanvas();
             // crash.Clear(Color.Blue);
-            // crash.DrawString(info.DISTRO_NAME + " has crashed\n\n restarting in 10 seconds",PCScreenFont.Default,Color.White,10,10);
+            // crash.DrawString(Info.DISTRO_NAME + " has crashed\n\n restarting in 10 seconds",PCScreenFont.Default,Color.White,10,10);
             // crash.Display();
             // Thread.Sleep(10000);
             // Cosmos.System.Power.Reboot();

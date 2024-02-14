@@ -71,16 +71,16 @@ namespace UniLua
 		VNIL,
 		VTRUE,
 		VFALSE,
-		VK,		/* info = index of constant in `k' */
+		VK,		/* Info = index of constant in `k' */
 		VKNUM,	/* nval = numerical value */
-		VNONRELOC,	/* info = result register */
-		VLOCAL,	/* info = local register */
-		VUPVAL,       /* info = index of upvalue in 'upvalues' */
+		VNONRELOC,	/* Info = result register */
+		VLOCAL,	/* Info = local register */
+		VUPVAL,       /* Info = index of upvalue in 'upvalues' */
 		VINDEXED,	/* t = table register/upvalue; idx = index R/K */
-		VJMP,		/* info = instruction pc */
-		VRELOCABLE,	/* info = instruction pc */
-		VCALL,	/* info = instruction pc */
-		VVARARG	/* info = instruction pc */
+		VJMP,		/* Info = instruction pc */
+		VRELOCABLE,	/* Info = instruction pc */
+		VCALL,	/* Info = instruction pc */
+		VVARARG	/* Info = instruction pc */
 	}
 
 	public static class ExpKindUtl

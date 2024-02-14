@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynox.SEF.Additional_Compilers
+namespace Lynox.SEF
 {
     public class Compiler
     {

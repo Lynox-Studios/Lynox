@@ -1,51 +1,53 @@
-﻿using Cosmos.HAL;
-using Cosmos.System.FileSystem;
+﻿using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
-using Cosmos.System.Graphics;
-using Cosmos.System.Graphics.Fonts;
 using Lynox.OSDISTRIBUTION;
-using Lynox.SEF;
 using System;
-using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Threading;
-using Sys = Cosmos.System;
 
 namespace Lynox
 {
-    public class Kernel : Sys.Kernel
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class Kernel : Cosmos.System.Kernel
     {
-        private int startPosX;
-        private int startPosY;
-        private bool optionConsole = true;
-        public static string SYSTEM_PATH = @"0:\";
-        public static DistributionManager distributionManager;
-        CosmosVFS vfs;
+        public static string SystemPath = @"0:\";
+        private static DistributionManager _distributionManager;
+        private static CosmosVFS _fileSystem;
 
         protected override void BeforeRun()
         {
 
-            vfs = new CosmosVFS();
-            VFSManager.RegisterVFS(vfs);
+            _fileSystem = new CosmosVFS();
+            VFSManager.RegisterVFS(_fileSystem);
 
-            distributionManager = new DistributionManager();
-            distributionManager.Start();
+            _distributionManager = new DistributionManager();
+            _distributionManager.Start();
         }
 
         protected override void Run()
         {
-            distributionManager.Update();
+            _distributionManager.Update();
         }
 
         protected override void AfterRun()
         {
-            var crash = FullScreenCanvas.GetCurrentFullScreenCanvas();
-            crash.Clear(Color.Blue);
-            crash.DrawString(info.DISTRO_NAME + " has crashed\n\n restarting in 10 seconds",PCScreenFont.Default,Color.White,10,10);
-            crash.Display();
+            // this is a case of crashing, as per your distribution setup,
+            // you may let the code be (if you want console crash screen) or comment the current code
+            // and uncomment the GUI code to satisfy your distro's needs.
+            // OR BE A MANIAC AND WRITE YOUR OWN CRASH MESSAGE
+
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.Clear();
+            Console.WriteLine("LYNOX KERNEL FAULT HAS OCCURRED. SYSTEM WILL RESTART IN 10 SECONDS.");
+            Console.WriteLine("ERROR: Crashed run function");
             Thread.Sleep(10000);
             Cosmos.System.Power.Reboot();
+
+            // var crash = FullScreenCanvas.GetCurrentFullScreenCanvas();
+            // crash.Clear(Color.Blue);
+            // crash.DrawString(info.DISTRO_NAME + " has crashed\n\n restarting in 10 seconds",PCScreenFont.Default,Color.White,10,10);
+            // crash.Display();
+            // Thread.Sleep(10000);
+            // Cosmos.System.Power.Reboot();
         }
 
     }

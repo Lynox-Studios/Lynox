@@ -13,7 +13,7 @@ namespace Lynox.OSDISTRIBUTION
         public void Start()
         {
 
-            //replace the code below with youre distro's code
+            //replace the code below with you're distro's code
             shell.Start();
 
         }
@@ -21,7 +21,7 @@ namespace Lynox.OSDISTRIBUTION
         public void Update()
         {
 
-            //replace the code below with youre distro's code
+            //replace the code below with you're distro's code
             shell.Update();
 
         }

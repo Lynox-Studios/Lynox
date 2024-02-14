@@ -31,7 +31,7 @@ namespace Lynox.OSDISTRIBUTION.BLTS
                 }
                 else
                 {
-                    if (File.Exists(Kernel.SYSTEM_PATH+args[1]))
+                    if (File.Exists(Kernel.SystemPath+args[1]))
                     {
                         new LUA().Execute(File.ReadAllText(args[1]));
                     }
@@ -52,13 +52,13 @@ namespace Lynox.OSDISTRIBUTION.BLTS
 
                 if (Directory.Exists(args[1]))
                 {
-                    Kernel.SYSTEM_PATH = args[1];
+                    Kernel.SystemPath = args[1];
                 }
                 else
                 {
-                    if (Directory.Exists(Kernel.SYSTEM_PATH+args[1]))
+                    if (Directory.Exists(Kernel.SystemPath+args[1]))
                     {
-                        Kernel.SYSTEM_PATH = Kernel.SYSTEM_PATH+args[1];
+                        Kernel.SystemPath = Kernel.SystemPath+args[1];
                     }
                     else
                     {
@@ -70,17 +70,17 @@ namespace Lynox.OSDISTRIBUTION.BLTS
             {"mkdir",(args) =>
             {
 
-                Directory.CreateDirectory(Kernel.SYSTEM_PATH+args[1]);
+                Directory.CreateDirectory(Kernel.SystemPath+args[1]);
 
             } },
             {"ls",(args) =>
             {
 
-                foreach (var item in Directory.GetDirectories(Kernel.SYSTEM_PATH))
+                foreach (var item in Directory.GetDirectories(Kernel.SystemPath))
                 {
                     Console.Write(item+" ");
 	            }
-                foreach (var item in Directory.GetFiles(Kernel.SYSTEM_PATH))
+                foreach (var item in Directory.GetFiles(Kernel.SystemPath))
                 {
                     Console.Write(item+" ");
                 }

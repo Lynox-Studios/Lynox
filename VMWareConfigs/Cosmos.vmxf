@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Foundry>
+<VM>
+<VMId type="string">52 1b 29 7f f0 1a 0a fa-8c e9 4f 64 02 16 c1 d4</VMId>
+<ClientMetaData>
+<clientMetaDataAttributes/>
+<HistoryEventList/></ClientMetaData>
+<vmxPathName type="string">Cosmos.vmx</vmxPathName></VM></Foundry>

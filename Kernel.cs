@@ -25,7 +25,15 @@ namespace Lynox
 
         protected override void Run()
         {
-            _distributionManager.Update();
+            // Kernel faults handled properly!
+            try
+            {
+                _distributionManager.Update();
+            }
+            catch (Exception e)
+            {
+                AfterRun();
+            }
         }
 
         protected override void AfterRun()
@@ -37,7 +45,7 @@ namespace Lynox
 
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
-            Console.WriteLine("LYNOX KERNEL FAULT HAS OCCURRED. SYSTEM WILL RESTART IN 10 SECONDS.");
+            Console.WriteLine(Info.DISTRO_NAME + " FAULT HAS OCCURRED. SYSTEM WILL RESTART IN 10 SECONDS.");
             Console.WriteLine("ERROR: Crashed run function");
             Thread.Sleep(10000);
             Cosmos.System.Power.Reboot();

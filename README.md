@@ -4,13 +4,18 @@
 Lynox is an OS that aims to be linux but is written in C#, it follows quite a bit of a unique approach than going 1:1 linux copycat, which is that it has a different style of code, it is supporrted via the CosmosOS framework that allows OS'es to be built in C# or dotnet-based languages.
 
 ### Progress Done so far
-**[THE CODE HAS BEEN RESET RECENTLY BACK TO BASE DUE TO COMPLICATIONS!]**
+- BLTS is now somewhat functional (Basic Lynox Testing Shell)
+- Crash Handling (to some extent)
 
 ### Building
-- Windows
-On windows, it's fairly simple being that you have the Cosmos DevKit (specifically from here [https://github.com/PratyushKing/Cosmos] for support reasons) and you have visual studio for windows, that should be enough to build it and test it with your preferrable VM option (mostly VMWare Player).
 
-- Linux
+##### - Windows<br>
+
+On windows, it's fairly simple being that you have the Cosmos DevKit (specifically from here [https://github.com/PratyushKing/Cosmos] for support reasons) and you have visual studio for windows, that should be enough to build it and test it with your preferrable VM option (mostly VMWare Player).
+<br>Alternatively you can use the vmrunner.ps1 file available in the source directory and run that to setup once and for all.
+
+##### - Linux<br>
+
 Linux does have a few limitations in this regard with the fact that it only has 1 proper way to run it being QEMU, installing part is very simple now with the help of my [PratyushKing] project, the CosmosCLI (https://github.com/PratyushKing/CosmosCLI) but if you still want to do it the manual way then you can follow the official cosmos wiki online. Now for installation follow:
   - Install the CosmosCLI as mentioned above.
   - Check if it installed by running `cosmos` in your terminal. If it didn't, further proceed with troubleshooting or open a github issue in the repository also linked above.

@@ -147,7 +147,7 @@ namespace Lynox.SEF
                         Console.Write(sefProgram.CPU.Ax);
                         break;
                     case EventType.ACCESS_FUNCTION_FROM_A_PRE_LOADED_STANDARD_LIBRARY:
-                        
+                        break;
                 }
             }
         }

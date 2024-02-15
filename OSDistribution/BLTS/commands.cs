@@ -87,7 +87,12 @@ namespace Lynox.OSDistribution.BLTS
                 Console.WriteLine();
 
             } },
+            {"sef",(args) =>
+            {
+                
+            } }
         };
 
+        public static void RegisterCommand(string command, Action<string[]> action) => Commands.Add(command, action);
     }
 }

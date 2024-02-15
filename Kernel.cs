@@ -12,6 +12,7 @@ namespace Lynox
         public static string SystemPath = @"0:\";
         private static DistributionManager _distributionManager;
         private static CosmosVFS _fileSystem;
+        public static int lastProcReturnCode = 0;
 
         protected override void BeforeRun()
         {

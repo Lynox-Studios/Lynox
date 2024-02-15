@@ -12,9 +12,10 @@ namespace Lynox.SEF
 {
     public static class SEF
     {
-        public static Dictionary<string, SEFProgram> StdLibs = new Dictionary<string, SEFProgram>()
+        public static Dictionary<string, Function> StdLibs = new Dictionary<string, Function>()
         {
-            {"stdio", new stdio()}
+            {"printf", new stdio().printFunction},
+            {"readf", new stdio().readFunction}
         };
         
         public struct CPU

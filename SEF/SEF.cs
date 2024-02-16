@@ -71,10 +71,7 @@ namespace Lynox.SEF
         public Action<int> Finished;
         internal List<Event> allEvents;
 
-        public SEFProgram()
-        {
-            
-        }
+        public SEFProgram() { }
 
         public virtual void ProgramRunning() => Finished(0);
 
